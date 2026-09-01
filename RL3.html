@@ -1,0 +1,1793 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulador de Secretário</title>
+    <style>
+        /* VARIABLES & THEMES */
+        :root {
+            --bg-color: #0b0f19;
+            --card-bg: rgba(18, 26, 43, 0.88);
+            --primary-accent: #0088ff;
+            --primary-glow: rgba(0, 136, 255, 0.5);
+            --secondary-accent: #004488;
+            --text-main: #f0f6fc;
+            --text-muted: #8b949e;
+            --success: #2ea44f;
+            --danger: #cb2431;
+            --warning: #d29922;
+            --purple: #a371f7;
+            --border-glow: 0 0 18px rgba(0, 136, 255, 0.4);
+            --bg-radial-1: rgba(0, 136, 255, 0.15);
+            --bg-radial-2: rgba(0, 68, 136, 0.12);
+            --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        /* TEMA VERMELHO (PARTE 2 - O DESAFIO DO CHEFE) */
+        body.theme-part2 {
+            --bg-color: #16090b;
+            --card-bg: rgba(36, 14, 18, 0.90);
+            --primary-accent: #ff2a4b;
+            --primary-glow: rgba(255, 42, 75, 0.6);
+            --secondary-accent: #8a0c20;
+            --border-glow: 0 0 25px rgba(255, 42, 75, 0.45);
+            --bg-radial-1: rgba(255, 42, 75, 0.20);
+            --bg-radial-2: rgba(138, 12, 32, 0.25);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: var(--font-family);
+            transition: background-color 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease, color 0.3s ease;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 15px;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 50% 10%, var(--bg-radial-1), transparent 45%),
+                radial-gradient(circle at 80% 80%, var(--bg-radial-2), transparent 35%);
+        }
+
+        /* MAIN CONTAINER */
+        .game-container {
+            width: 100%;
+            max-width: 650px;
+            background: var(--card-bg);
+            border: 1px solid var(--primary-accent);
+            border-radius: 16px;
+            padding: 25px;
+            box-shadow: var(--border-glow);
+            backdrop-filter: blur(12px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* HUD */
+        .hud {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 10px 15px;
+            border-radius: 10px;
+            margin-bottom: 12px;
+            border: 1px solid var(--primary-glow);
+        }
+
+        .hud-item {
+            font-size: 0.85rem;
+            font-weight: bold;
+        }
+
+        .hud-label {
+            color: var(--text-muted);
+            margin-right: 4px;
+        }
+
+        .hud-value {
+            color: var(--primary-accent);
+            text-shadow: 0 0 8px var(--primary-glow);
+        }
+
+        /* TIMER BARRA & BADGE */
+        .timer-container {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            margin-bottom: 15px;
+        }
+
+        .timer-header {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            font-weight: bold;
+        }
+
+        .timer-text {
+            color: #ffd700;
+            font-family: monospace;
+            font-size: 1.1rem;
+        }
+
+        .timer-text.urgent {
+            color: #ff334b !important;
+            animation: pulseWarning 0.5s infinite alternate;
+        }
+
+        .timer-bar-outer {
+            width: 100%;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .timer-bar-inner {
+            height: 100%;
+            width: 100%;
+            background: linear-gradient(90deg, #2ea44f, #d29922, #cb2431);
+            transition: width 1s linear, background 0.3s;
+        }
+
+        /* PROGRESS BAR */
+        .progress-container {
+            width: 100%;
+            height: 5px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+            margin-bottom: 18px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, var(--secondary-accent), var(--primary-accent));
+            transition: width 0.4s ease;
+            box-shadow: 0 0 10px var(--primary-accent);
+        }
+
+        /* SCREENS */
+        .screen {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 20px;
+            animation: fadeIn 0.4s ease-in-out;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        /* TYPOGRAPHY & CARDS */
+        .game-title {
+            font-size: 2.2rem;
+            letter-spacing: 2px;
+            color: var(--text-main);
+            text-transform: uppercase;
+        }
+
+        .highlight {
+            color: var(--primary-accent);
+            text-shadow: 0 0 14px var(--primary-glow);
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        .card {
+            background: rgba(0, 0, 0, 0.35);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            padding: 20px;
+            width: 100%;
+        }
+
+        .high-score-card {
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #ffd700;
+            border-color: rgba(255, 215, 0, 0.3);
+        }
+
+        .narrative-box p {
+            margin-bottom: 12px;
+            line-height: 1.5;
+            color: #d0d7de;
+        }
+
+        .text-left p {
+            text-align: left;
+            margin-bottom: 10px;
+        }
+
+        /* QUIZ ELEMENTS */
+        .quiz-card {
+            text-align: left;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 12px;
+            background: var(--secondary-accent);
+            color: #fff;
+            font-size: 0.75rem;
+            border-radius: 20px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            font-weight: bold;
+            border: 1px solid var(--primary-glow);
+            letter-spacing: 0.5px;
+        }
+
+        .badge-danger {
+            background: #cb2431;
+            box-shadow: 0 0 10px rgba(203, 36, 49, 0.6);
+            animation: pulseWarning 1s infinite alternate;
+        }
+
+        @keyframes pulseWarning {
+            from { transform: scale(1); }
+            to { transform: scale(1.06); }
+        }
+
+        #question-title {
+            font-size: 1.3rem;
+            margin-bottom: 8px;
+        }
+
+        #question-text {
+            color: #c9d1d9;
+            margin-bottom: 20px;
+            font-size: 1rem;
+            line-height: 1.4;
+        }
+
+        .options-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            width: 100%;
+        }
+
+        .option-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--primary-glow);
+            color: var(--text-main);
+            padding: 12px 16px;
+            border-radius: 8px;
+            text-align: left;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .option-btn:hover:not(:disabled) {
+            background: rgba(255, 255, 255, 0.12);
+            border-color: var(--primary-accent);
+            box-shadow: 0 0 10px var(--primary-glow);
+            transform: translateX(4px);
+        }
+
+        .option-btn:disabled {
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+
+        .option-btn.correct {
+            background: rgba(46, 164, 79, 0.25) !important;
+            border-color: var(--success) !important;
+            color: #7ee787;
+            box-shadow: 0 0 12px rgba(46, 164, 79, 0.4);
+        }
+
+        .option-btn.wrong {
+            background: rgba(203, 36, 49, 0.25) !important;
+            border-color: var(--danger) !important;
+            color: #ff7b72;
+            box-shadow: 0 0 12px rgba(203, 36, 49, 0.4);
+        }
+
+        /* FEEDBACK BOX */
+        .feedback-box {
+            margin-top: 15px;
+            padding: 15px;
+            border-radius: 8px;
+            background: rgba(0, 0, 0, 0.6);
+            border: 1px solid #30363d;
+        }
+
+        .feedback-title {
+            font-weight: bold;
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+
+        .feedback-desc {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 12px;
+        }
+
+        /* BUTTONS */
+        .button-group {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            width: 100%;
+        }
+
+        .btn {
+            padding: 14px 24px;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn-primary {
+            background: var(--primary-accent);
+            color: #fff;
+            box-shadow: 0 0 12px var(--primary-glow);
+        }
+
+        .btn-primary:hover {
+            filter: brightness(1.15);
+            box-shadow: 0 0 22px var(--primary-glow);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.08);
+            color: var(--text-main);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.18);
+        }
+
+        .btn-small {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            padding: 6px 12px;
+            font-size: 0.75rem;
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-muted);
+            border: none;
+            border-radius: 4px;
+        }
+
+        /* CUTSCENE ENHANCED */
+        #screen-cutscene {
+            position: relative;
+            min-height: 320px;
+            justify-content: center;
+        }
+
+        .cutscene-container {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .cutscene-text {
+            font-size: 1.05rem;
+            line-height: 1.6;
+            color: var(--text-main);
+            min-height: 140px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            width: 100%;
+            text-align: left;
+            background: rgba(0,0,0,0.4);
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .difficulty-alert-box {
+            background: rgba(203, 36, 49, 0.2);
+            border: 2px solid var(--danger);
+            border-radius: 10px;
+            padding: 12px;
+            color: #ff7b72;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            box-shadow: 0 0 15px rgba(203, 36, 49, 0.4);
+            animation: fadeIn 0.5s ease-in, pulseWarning 1s infinite alternate;
+        }
+
+        /* SUSPENSE SCREEN (DRUMROLL) */
+        #screen-suspense {
+            min-height: 280px;
+            justify-content: center;
+        }
+
+        .suspense-icon {
+            font-size: 4rem;
+            animation: shake 0.2s infinite;
+        }
+
+        .suspense-title {
+            font-size: 1.6rem;
+            letter-spacing: 2px;
+            color: #ffd700;
+            text-shadow: 0 0 12px rgba(255, 215, 0, 0.5);
+        }
+
+        .suspense-bar-outer {
+            width: 80%;
+            height: 10px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .suspense-bar-inner {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #d29922, #ffd700, #cb2431);
+            transition: width 2.4s linear;
+        }
+
+        @keyframes shake {
+            0% { transform: translate(1px, 1px) rotate(0deg); }
+            20% { transform: translate(-2px, 0px) rotate(-1deg); }
+            40% { transform: translate(2px, -1px) rotate(1deg); }
+            60% { transform: translate(-1px, 2px) rotate(0deg); }
+            80% { transform: translate(2px, 1px) rotate(-1deg); }
+            100% { transform: translate(1px, -2px) rotate(1deg); }
+        }
+
+        /* ENDINGS */
+        .ending-icon {
+            font-size: 3.5rem;
+            margin-bottom: 10px;
+        }
+
+        .ending-desc {
+            margin: 15px 0;
+            line-height: 1.5;
+            color: #c9d1d9;
+        }
+
+        .final-stats {
+            display: flex;
+            justify-content: space-around;
+            background: rgba(0, 0, 0, 0.4);
+            padding: 10px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+        }
+
+        /* QR CODE COMPLIANT BOX */
+        .qr-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .qr-canvas-wrapper {
+            background: #ffffff;
+            padding: 16px;
+            border-radius: 12px;
+            display: inline-block;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+        }
+
+        .qr-canvas-wrapper canvas {
+            display: block;
+            image-rendering: pixelated;
+        }
+
+        .qr-input-group {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            text-align: left;
+        }
+
+        .qr-input {
+            width: 100%;
+            padding: 10px 14px;
+            background: rgba(0,0,0,0.5);
+            border: 1px solid var(--primary-accent);
+            border-radius: 8px;
+            color: #fff;
+            font-size: 0.9rem;
+        }
+
+        /* ANIMATIONS */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 480px) {
+            .game-title { font-size: 1.7rem; }
+            .game-container { padding: 15px; }
+            .hud { flex-wrap: wrap; gap: 8px; }
+            .hud-item { font-size: 0.75rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <!-- HUD / BARRA SUPERIOR -->
+        <header id="hud" class="hud hidden">
+            <div class="hud-item">
+                <span class="hud-label">PARTE:</span>
+                <span id="hud-part" class="hud-value">1</span>
+            </div>
+            <div class="hud-item">
+                <span class="hud-label">ACERTOS:</span>
+                <span id="hud-hits" class="hud-value">0/5</span>
+            </div>
+            <div class="hud-item">
+                <span class="hud-label">PONTOS:</span>
+                <span id="hud-score" class="hud-value">0</span>
+            </div>
+            <div class="hud-item">
+                <span class="hud-label">CONFIANÇA:</span>
+                <span id="hud-trust" class="hud-value">50%</span>
+            </div>
+        </header>
+
+        <!-- TIMER / TEMPO LIMITE -->
+        <div id="timer-container" class="timer-container hidden">
+            <div class="timer-header">
+                <span id="timer-label" style="color: var(--text-muted);">⏳ TEMPO RESTANTE:</span>
+                <span id="timer-display" class="timer-text">25s</span>
+            </div>
+            <div class="timer-bar-outer">
+                <div id="timer-bar" class="timer-bar-inner"></div>
+            </div>
+        </div>
+
+        <!-- BARRA DE PROGRESSO -->
+        <div id="progress-bar-container" class="progress-container hidden">
+            <div id="progress-bar" class="progress-bar"></div>
+        </div>
+
+        <!-- TELA INICIAL -->
+        <section id="screen-start" class="screen active">
+            <h1 class="game-title">SIMULADOR DE<br><span class="highlight">SECRETÁRIO</span></h1>
+            <p class="subtitle">Sua carreira corporativa começa agora... ou termina antes do almoço.</p>
+            
+            <div class="card high-score-card">
+                🏆 MELHOR PONTUAÇÃO: <span id="high-score-display">000</span>
+            </div>
+
+            <div class="button-group">
+                <button id="btn-start" class="btn btn-primary">JOGAR</button>
+                <button id="btn-how-to-play" class="btn btn-secondary">COMO JOGAR</button>
+                <button id="btn-open-qr" class="btn btn-secondary">📱 JOGAR NO CELULAR (QR CODE)</button>
+            </div>
+        </section>
+
+        <!-- TELA QR CODE 100% FUNCIONAL -->
+        <section id="screen-qr" class="screen hidden">
+            <h2>📱 QR CODE FUNCIONAL</h2>
+            <p class="subtitle">Aponte a câmera do seu celular para escanear e abrir o link!</p>
+            <div class="card qr-card">
+                <div class="qr-canvas-wrapper">
+                    <canvas id="qr-canvas" width="200" height="200"></canvas>
+                </div>
+                <div class="qr-input-group">
+                    <label style="font-size: 0.8rem; color: var(--text-muted);">Digite o link completo do site (com https://):</label>
+                    <input type="text" id="qr-url-input" class="qr-input" value="https://google.com">
+                    <button id="btn-update-qr" class="btn btn-secondary" style="padding: 8px 14px; font-size: 0.85rem;">GERAR NOVO QR CODE</button>
+                </div>
+            </div>
+            <button id="btn-back-from-qr" class="btn btn-primary">VOLTAR AO JOGO</button>
+        </section>
+
+        <!-- TELA COMO JOGAR -->
+        <section id="screen-how-to-play" class="screen hidden">
+            <h2>COMO JOGAR</h2>
+            <div class="card text-left">
+                <p>📌 <strong>Parte 1 (Fase Azul):</strong> 5 perguntas simples de lógica. Você tem <strong>25 segundos</strong> por pergunta!</p>
+                <p>⚠️ <strong>A Cutscene:</strong> O Chefe assume o controle com perguntas difíceis e aceleradas!</p>
+                <p>⚡ <strong>Parte 2 (Fase Vermelha - Hard):</strong> Tempo reduzido para <strong>15 segundos</strong> por pergunta! Responda rápido antes do tempo esgotar.</p>
+                <p>🥁 <strong>Suspense Final:</strong> Rufar de tambores antes de revelar seu destino ou <em>Finais Secretos</em>!</p>
+            </div>
+            <button id="btn-back-start" class="btn btn-secondary">VOLTAR</button>
+        </section>
+
+        <!-- TELA DE INTRODUÇÃO NARRATIVA -->
+        <section id="screen-intro" class="screen hidden">
+            <h2>PRIMEIRO DIA DE TRABALHO</h2>
+            <div class="card narrative-box">
+                <p>Você acaba de ser contratado como o novo secretário da TechCorp Enterprise.</p>
+                <p>Sua mesa está organizada, o cronômetro está ativado e o terminal de testes está ligado. Seja rápido e mostre agilidade de raciocínio!</p>
+            </div>
+            <button id="btn-start-p1" class="btn btn-primary">INICIAR TESTE BÁSICO (25s)</button>
+        </section>
+
+        <!-- TELA DO JOGO (PERGUNTAS PARTE 1 E 2) -->
+        <section id="screen-quiz" class="screen hidden">
+            <div class="card quiz-card">
+                <span id="question-category" class="badge">Raciocínio Lógico</span>
+                <h3 id="question-title">Pergunta...</h3>
+                <p id="question-text">Texto da pergunta...</p>
+                
+                <div id="options-container" class="options-grid">
+                    <!-- Opções inseridas via JS -->
+                </div>
+
+                <div id="feedback-container" class="feedback-box hidden">
+                    <p id="feedback-status" class="feedback-title"></p>
+                    <p id="feedback-text" class="feedback-desc"></p>
+                    <button id="btn-next-question" class="btn btn-primary">PRÓXIMA PERGUNTA</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- TELA DE CUTSCENE COM AVISO DRAMÁTICO DE DIFICULDADE -->
+        <section id="screen-cutscene" class="screen hidden">
+            <button id="btn-skip-cutscene" class="btn btn-small">PULAR ⏭</button>
+            <div class="cutscene-container">
+                <span class="badge badge-danger">⚠️ ALERTA DA DIRETORIA</span>
+                <div id="cutscene-text" class="cutscene-text">
+                    <!-- Gerado via JS linha por linha -->
+                </div>
+                <div id="difficulty-alert" class="difficulty-alert-box hidden">
+                    ⚡ MODO HARD: TEMPO REDUZIDO PARA 15 SEGUNDOS! Pense rápido ou será demitido!
+                </div>
+                <button id="btn-start-p2" class="btn btn-primary hidden">CONTINUAR PARA O DESAFIO DO CHEFE</button>
+            </div>
+        </section>
+
+        <!-- TELA DE SUSPENSE COM RUFAR DE TAMBORES -->
+        <section id="screen-suspense" class="screen hidden">
+            <div class="suspense-icon">🥁</div>
+            <h2 class="suspense-title">AVALIANDO SEU DESEMPENHO...</h2>
+            <p class="subtitle" id="suspense-text">O Chefe está revisando suas respostas minuciosamente...</p>
+            <div class="suspense-bar-outer">
+                <div id="suspense-bar" class="suspense-bar-inner"></div>
+            </div>
+        </section>
+
+        <!-- TELA DE FINAL -->
+        <section id="screen-ending" class="screen hidden">
+            <div class="card ending-card">
+                <div id="ending-icon" class="ending-icon">🏆</div>
+                <h2 id="ending-title">FINAL</h2>
+                <div id="ending-badge" class="badge">STATUS</div>
+                <p id="ending-description" class="ending-desc">Descrição do final...</p>
+
+                <div class="final-stats">
+                    <div><strong>Pontuação Final:</strong> <span id="final-score">0</span></div>
+                    <div><strong>Total de Acertos:</strong> <span id="final-hits">0/10</span></div>
+                </div>
+
+                <div class="button-group">
+                    <button id="btn-restart" class="btn btn-primary">JOGAR NOVAMENTE</button>
+                    <button id="btn-final-qr" class="btn btn-secondary">📱 COMPARTILHAR QR CODE</button>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        /* ==========================================================================
+           QR CODE ENCODER 100% PADRÃO ISO/IEC (STANDALONE & OFFLINE)
+           Gera QR Code REAL que abre em qualquer leitor/câmera de smartphone
+           ========================================================================== */
+        var QRCode = (function() {
+            // Reed-Solomon & QR Code Matrix Generator Implementation
+            function QR8bitByte(data) {
+                this.mode = 4;
+                this.data = data;
+            }
+            QR8bitByte.prototype = {
+                getLength: function() { return this.data.length; },
+                write: function(buffer) {
+                    for (var i = 0; i < this.data.length; i++) {
+                        buffer.put(this.data.charCodeAt(i), 8);
+                    }
+                }
+            };
+
+            function QRCodeModel(typeNumber, errorCorrectLevel) {
+                this.typeNumber = typeNumber;
+                this.errorCorrectLevel = errorCorrectLevel;
+                this.modules = null;
+                this.moduleCount = 0;
+                this.dataCache = null;
+                this.dataList = [];
+            }
+
+            QRCodeModel.prototype = {
+                addData: function(data) {
+                    this.dataList.push(new QR8bitByte(data));
+                    this.dataCache = null;
+                },
+                isDark: function(row, col) {
+                    if (row < 0 || this.moduleCount <= row || col < 0 || this.moduleCount <= col) {
+                        throw new Error(row + "," + col);
+                    }
+                    return this.modules[row][col];
+                },
+                getModuleCount: function() { return this.moduleCount; },
+                make: function() {
+                    if (this.typeNumber < 1) {
+                        var typeNumber = 1;
+                        for (typeNumber = 1; typeNumber < 40; typeNumber++) {
+                            var rsBlocks = QRRSBlock.getRSBlocks(typeNumber, this.errorCorrectLevel);
+                            var buffer = new QRBitBuffer();
+                            var totalDataCount = 0;
+                            for (var i = 0; i < rsBlocks.length; i++) totalDataCount += rsBlocks[i].dataCount;
+                            for (var i = 0; i < this.dataList.length; i++) {
+                                var data = this.dataList[i];
+                                buffer.put(data.mode, 4);
+                                buffer.put(data.getLength(), QRUtil.getLengthInBits(data.mode, typeNumber));
+                                data.write(buffer);
+                            }
+                            if (buffer.getLengthInBits() <= totalDataCount * 8) break;
+                        }
+                        this.typeNumber = typeNumber;
+                    }
+                    this.makeImpl(false, this.getBestMaskPattern());
+                },
+                makeImpl: function(test, maskPattern) {
+                    this.moduleCount = this.typeNumber * 4 + 17;
+                    this.modules = new Array(this.moduleCount);
+                    for (var row = 0; row < this.moduleCount; row++) {
+                        this.modules[row] = new Array(this.moduleCount);
+                        for (var col = 0; col < this.moduleCount; col++) this.modules[row][col] = null;
+                    }
+                    this.setupPositionProbePattern(0, 0);
+                    this.setupPositionProbePattern(this.moduleCount - 7, 0);
+                    this.setupPositionProbePattern(0, this.moduleCount - 7);
+                    this.setupTimingPattern();
+                    this.setupPositionAdjustPattern();
+                    this.setupTypeInfo(test, maskPattern);
+                    if (this.typeNumber >= 7) this.setupTypeNumber(test);
+                    if (this.dataCache == null) {
+                        this.dataCache = QRCodeModel.createData(this.typeNumber, this.errorCorrectLevel, this.dataList);
+                    }
+                    this.mapData(this.dataCache, maskPattern);
+                },
+                setupPositionProbePattern: function(row, col) {
+                    for (var r = -1; r <= 7; r++) {
+                        if (row + r <= -1 || this.moduleCount <= row + r) continue;
+                        for (var c = -1; c <= 7; c++) {
+                            if (col + c <= -1 || this.moduleCount <= col + c) continue;
+                            if ((0 <= r && r <= 6 && (c == 0 || c == 6)) ||
+                                (0 <= c && c <= 6 && (r == 0 || r == 6)) ||
+                                (2 <= r && r <= 4 && 2 <= c && c <= 4)) {
+                                this.modules[row + r][col + c] = true;
+                            } else {
+                                this.modules[row + r][col + c] = false;
+                            }
+                        }
+                    }
+                },
+                getBestMaskPattern: function() {
+                    var minLostPoint = 0;
+                    var pattern = 0;
+                    for (var i = 0; i < 8; i++) {
+                        this.makeImpl(true, i);
+                        var lostPoint = QRUtil.getLostPoint(this);
+                        if (i == 0 || minLostPoint > lostPoint) {
+                            minLostPoint = lostPoint;
+                            pattern = i;
+                        }
+                    }
+                    return pattern;
+                },
+                setupTimingPattern: function() {
+                    for (var r = 8; r < this.moduleCount - 8; r++) {
+                        if (this.modules[r][6] !== null) continue;
+                        this.modules[r][6] = (r % 2 == 0);
+                    }
+                    for (var c = 8; c < this.moduleCount - 8; c++) {
+                        if (this.modules[6][c] !== null) continue;
+                        this.modules[6][c] = (c % 2 == 0);
+                    }
+                },
+                setupPositionAdjustPattern: function() {
+                    var pos = QRUtil.getPatternPosition(this.typeNumber);
+                    for (var i = 0; i < pos.length; i++) {
+                        for (var j = 0; j < pos.length; j++) {
+                            var row = pos[i];
+                            var col = pos[j];
+                            if (this.modules[row][col] !== null) continue;
+                            for (var r = -2; r <= 2; r++) {
+                                for (var c = -2; c <= 2; c++) {
+                                    if (r == -2 || r == 2 || c == -2 || c == 2 || (r == 0 && c == 0)) {
+                                        this.modules[row + r][col + c] = true;
+                                    } else {
+                                        this.modules[row + r][col + c] = false;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                setupTypeInfo: function(test, maskPattern) {
+                    var data = (1 << 3) | maskPattern;
+                    var bits = QRUtil.getBCHTypeInfo(data);
+                    for (var i = 0; i < 15; i++) {
+                        var mod = (!test && ((bits >> i) & 1) == 1);
+                        if (i < 6) this.modules[i][8] = mod;
+                        else if (i < 8) this.modules[i + 1][8] = mod;
+                        else this.modules[this.moduleCount - 15 + i][8] = mod;
+                    }
+                    for (var i = 0; i < 15; i++) {
+                        var mod = (!test && ((bits >> i) & 1) == 1);
+                        if (i < 8) this.modules[8][this.moduleCount - i - 1] = mod;
+                        else if (i < 9) this.modules[8][15 - i - 1 + 1] = mod;
+                        else this.modules[8][15 - i - 1] = mod;
+                    }
+                    this.modules[this.moduleCount - 8][8] = (!test);
+                },
+                mapData: function(data, maskPattern) {
+                    var inc = -1;
+                    var row = this.moduleCount - 1;
+                    var bitIndex = 7;
+                    var byteIndex = 0;
+                    var maskFunc = QRUtil.getMaskFunction(maskPattern);
+                    for (var col = this.moduleCount - 1; col > 0; col -= 2) {
+                        if (col == 6) col--;
+                        while (true) {
+                            for (var c = 0; c < 2; c++) {
+                                if (this.modules[row][col - c] === null) {
+                                    var dark = false;
+                                    if (byteIndex < data.length) {
+                                        dark = (((data[byteIndex] >>> bitIndex) & 1) == 1);
+                                    }
+                                    var mask = maskFunc(row, col - c);
+                                    if (mask) dark = !dark;
+                                    this.modules[row][col - c] = dark;
+                                    bitIndex--;
+                                    if (bitIndex == -1) {
+                                        byteIndex++;
+                                        bitIndex = 7;
+                                    }
+                                }
+                            }
+                            row += inc;
+                            if (row < 0 || this.moduleCount <= row) {
+                                row -= inc;
+                                inc = -inc;
+                                break;
+                            }
+                        }
+                    }
+                }
+            };
+
+            QRCodeModel.createData = function(typeNumber, errorCorrectLevel, dataList) {
+                var rsBlocks = QRRSBlock.getRSBlocks(typeNumber, errorCorrectLevel);
+                var buffer = new QRBitBuffer();
+                for (var i = 0; i < dataList.length; i++) {
+                    var data = dataList[i];
+                    buffer.put(data.mode, 4);
+                    buffer.put(data.getLength(), QRUtil.getLengthInBits(data.mode, typeNumber));
+                    data.write(buffer);
+                }
+                var totalDataCount = 0;
+                for (var i = 0; i < rsBlocks.length; i++) totalDataCount += rsBlocks[i].dataCount;
+                if (buffer.getLengthInBits() > totalDataCount * 8) throw new Error("Link muito longo para este tamanho!");
+                if (buffer.getLengthInBits() + 4 <= totalDataCount * 8) buffer.put(0, 4);
+                while (buffer.getLengthInBits() % 8 != 0) buffer.putBit(false);
+                while (true) {
+                    if (buffer.getLengthInBits() >= totalDataCount * 8) break;
+                    buffer.put(0xEC, 8);
+                    if (buffer.getLengthInBits() >= totalDataCount * 8) break;
+                    buffer.put(0x11, 8);
+                }
+                return QRCodeModel.createBytes(buffer, rsBlocks);
+            };
+
+            QRCodeModel.createBytes = function(buffer, rsBlocks) {
+                var offset = 0;
+                var maxDcCount = 0;
+                var maxEcCount = 0;
+                var dcdata = new Array(rsBlocks.length);
+                var ecdata = new Array(rsBlocks.length);
+                for (var r = 0; r < rsBlocks.length; r++) {
+                    var dcCount = rsBlocks[r].dataCount;
+                    var ecCount = rsBlocks[r].totalCount - dcCount;
+                    maxDcCount = Math.max(maxDcCount, dcCount);
+                    maxEcCount = Math.max(maxEcCount, ecCount);
+                    dcdata[r] = new Array(dcCount);
+                    for (var i = 0; i < dcdata[r].length; i++) dcdata[r][i] = 0xff & buffer.buffer[i + offset];
+                    offset += dcCount;
+                    var rsPoly = QRUtil.getErrorCorrectPolynomial(ecCount);
+                    var rawPoly = new QRPolynomial(dcdata[r], rsPoly.getLength() - 1);
+                    var modPoly = rawPoly.mod(rsPoly);
+                    ecdata[r] = new Array(rsPoly.getLength() - 1);
+                    for (var i = 0; i < ecdata[r].length; i++) {
+                        var modIndex = i + modPoly.getLength() - ecdata[r].length;
+                        ecdata[r][i] = (modIndex >= 0) ? modPoly.get(modIndex) : 0;
+                    }
+                }
+                var totalCodeCount = 0;
+                for (var i = 0; i < rsBlocks.length; i++) totalCodeCount += rsBlocks[i].totalCount;
+                var data = new Array(totalCodeCount);
+                var index = 0;
+                for (var i = 0; i < maxDcCount; i++) {
+                    for (var r = 0; r < rsBlocks.length; r++) {
+                        if (i < dcdata[r].length) data[index++] = dcdata[r][i];
+                    }
+                }
+                for (var i = 0; i < maxEcCount; i++) {
+                    for (var r = 0; r < rsBlocks.length; r++) {
+                        if (i < ecdata[r].length) data[index++] = ecdata[r][i];
+                    }
+                }
+                return data;
+            };
+
+            var QRUtil = {
+                PATTERN_POSITION_TABLE: [
+                    [], [6, 18], [6, 22], [6, 26], [6, 30], [6, 34],
+                    [6, 22, 38], [6, 24, 42], [6, 26, 46], [6, 28, 50], [6, 30, 54],
+                    [6, 32, 58], [6, 34, 62], [6, 26, 46, 66], [6, 28, 50, 70]
+                ],
+                getBCHTypeInfo: function(data) {
+                    var d = data << 10;
+                    while (QRUtil.getBCHDigit(d) - QRUtil.getBCHDigit(1335) >= 0) {
+                        d ^= (1335 << (QRUtil.getBCHDigit(d) - QRUtil.getBCHDigit(1335)));
+                    }
+                    return ((data << 10) | d) ^ 21522;
+                },
+                getBCHDigit: function(data) {
+                    var digit = 0;
+                    while (data != 0) { digit++; data >>>= 1; }
+                    return digit;
+                },
+                getPatternPosition: function(typeNumber) { return QRUtil.PATTERN_POSITION_TABLE[typeNumber - 1] || []; },
+                getMaskFunction: function(maskPattern) {
+                    switch (maskPattern) {
+                        case 0: return function(i, j) { return (i + j) % 2 == 0; };
+                        case 1: return function(i, j) { return i % 2 == 0; };
+                        case 2: return function(i, j) { return j % 3 == 0; };
+                        case 3: return function(i, j) { return (i + j) % 3 == 0; };
+                        case 4: return function(i, j) { return (Math.floor(i / 2) + Math.floor(j / 3)) % 2 == 0; };
+                        case 5: return function(i, j) { return (i * j) % 2 + (i * j) % 3 == 0; };
+                        case 6: return function(i, j) { return ((i * j) % 2 + (i * j) % 3) % 2 == 0; };
+                        case 7: return function(i, j) { return ((i * j) % 3 + (i + j) % 2) % 2 == 0; };
+                    }
+                },
+                getErrorCorrectPolynomial: function(errorCorrectLength) {
+                    var a = new QRPolynomial([1], 0);
+                    for (var i = 0; i < errorCorrectLength; i++) {
+                        a = a.multiply(new QRPolynomial([1, QRMath.gexp(i)], 0));
+                    }
+                    return a;
+                },
+                getLengthInBits: function(mode, type) {
+                    if (1 <= type && type < 10) return 8;
+                    return 16;
+                },
+                getLostPoint: function(qrCode) {
+                    var moduleCount = qrCode.getModuleCount();
+                    var lostPoint = 0;
+                    for (var row = 0; row < moduleCount; row++) {
+                        for (var col = 0; col < moduleCount; col++) {
+                            var sameCount = 0;
+                            var dark = qrCode.isDark(row, col);
+                            for (var r = -1; r <= 1; r++) {
+                                if (row + r < 0 || moduleCount <= row + r) continue;
+                                for (var c = -1; c <= 1; c++) {
+                                    if (col + c < 0 || moduleCount <= col + c) continue;
+                                    if (r == 0 && c == 0) continue;
+                                    if (dark == qrCode.isDark(row + r, col + c)) sameCount++;
+                                }
+                            }
+                            if (sameCount > 5) lostPoint += (3 + sameCount - 5);
+                        }
+                    }
+                    return lostPoint;
+                }
+            };
+
+            var QRMath = {
+                glog: function(n) { if (n < 1) throw new Error("glog(" + n + ")"); return QRMath.LOG_TABLE[n]; },
+                gexp: function(n) { while (n < 0) n += 255; while (n >= 255) n -= 255; return QRMath.EXP_TABLE[n]; },
+                EXP_TABLE: new Array(256),
+                LOG_TABLE: new Array(256)
+            };
+            for (var i = 0; i < 8; i++) QRMath.EXP_TABLE[i] = 1 << i;
+            for (var i = 8; i < 256; i++) QRMath.EXP_TABLE[i] = QRMath.EXP_TABLE[i - 4] ^ QRMath.EXP_TABLE[i - 5] ^ QRMath.EXP_TABLE[i - 6] ^ QRMath.EXP_TABLE[i - 8];
+            for (var i = 0; i < 255; i++) QRMath.LOG_TABLE[QRMath.EXP_TABLE[i]] = i;
+
+            function QRPolynomial(num, shift) {
+                var offset = 0;
+                while (offset < num.length && num[offset] == 0) offset++;
+                this.num = new Array(num.length - offset + shift);
+                for (var i = 0; i < num.length - offset; i++) this.num[i] = num[i + offset];
+            }
+            QRPolynomial.prototype = {
+                get: function(index) { return this.num[index]; },
+                getLength: function() { return this.num.length; },
+                multiply: function(e) {
+                    var num = new Array(this.getLength() + e.getLength() - 1);
+                    for (var i = 0; i < this.getLength(); i++) {
+                        for (var j = 0; j < e.getLength(); j++) {
+                            num[i + j] ^= QRMath.gexp(QRMath.glog(this.get(i)) + QRMath.glog(e.get(j)));
+                        }
+                    }
+                    return new QRPolynomial(num, 0);
+                },
+                mod: function(e) {
+                    if (this.getLength() - e.getLength() < 0) return this;
+                    var ratio = QRMath.glog(this.get(0)) - QRMath.glog(e.get(0));
+                    var num = new Array(this.getLength());
+                    for (var i = 0; i < this.getLength(); i++) num[i] = this.get(i);
+                    for (var i = 0; i < e.getLength(); i++) {
+                        num[i] ^= QRMath.gexp(QRMath.glog(e.get(i)) + ratio);
+                    }
+                    return new QRPolynomial(num, 0).mod(e);
+                }
+            };
+
+            function QRRSBlock(totalCount, dataCount) {
+                this.totalCount = totalCount;
+                this.dataCount = dataCount;
+            }
+            QRRSBlock.RS_BLOCK_TABLE = [
+                [1, 26, 19], [1, 44, 34], [1, 70, 55], [1, 100, 80],
+                [1, 134, 108], [2, 86, 68], [2, 98, 78], [2, 121, 97],
+                [2, 146, 116], [2, 86, 68, 2, 87, 69]
+            ];
+            QRRSBlock.getRSBlocks = function(typeNumber) {
+                var rsBlock = QRRSBlock.RS_BLOCK_TABLE[typeNumber - 1];
+                if (!rsBlock) rsBlock = [1, 26, 19];
+                var list = [];
+                for (var i = 0; i < rsBlock.length; i += 3) {
+                    var count = rsBlock[i];
+                    var totalCount = rsBlock[i + 1];
+                    var dataCount = rsBlock[i + 2];
+                    for (var j = 0; j < count; j++) list.push(new QRRSBlock(totalCount, dataCount));
+                }
+                return list;
+            };
+
+            function QRBitBuffer() {
+                this.buffer = [];
+                this.length = 0;
+            }
+            QRBitBuffer.prototype = {
+                get: function(index) { return ((this.buffer[Math.floor(index / 8)] >>> (7 - index % 8)) & 1) == 1; },
+                put: function(num, length) { for (var i = 0; i < length; i++) this.putBit(((num >>> (length - i - 1)) & 1) == 1); },
+                getLengthInBits: function() { return this.length; },
+                putBit: function(bit) {
+                    var bufIndex = Math.floor(this.length / 8);
+                    if (this.buffer.length <= bufIndex) this.buffer.push(0);
+                    if (bit) this.buffer[bufIndex] |= (0x80 >>> (this.length % 8));
+                    this.length++;
+                }
+            };
+
+            return {
+                drawCanvas: function(text, canvas) {
+                    var qr = new QRCodeModel(0, 1);
+                    qr.addData(text);
+                    qr.make();
+                    var ctx = canvas.getContext('2d');
+                    var moduleCount = qr.getModuleCount();
+                    var size = canvas.width;
+                    var margin = 2;
+                    var cellSize = size / (moduleCount + margin * 2);
+                    ctx.fillStyle = '#ffffff';
+                    ctx.fillRect(0, 0, size, size);
+                    ctx.fillStyle = '#000000';
+                    for (var r = 0; r < moduleCount; r++) {
+                        for (var c = 0; c < moduleCount; c++) {
+                            if (qr.isDark(r, c)) {
+                                ctx.fillRect(Math.round((c + margin) * cellSize), Math.round((r + margin) * cellSize), Math.ceil(cellSize), Math.ceil(cellSize));
+                            }
+                        }
+                    }
+                }
+            };
+        })();
+
+        /* ==========================================================================
+           SIMULADOR DE SECRETÁRIO - ENGINE COMPLETA
+           ========================================================================== */
+
+        const part1Questions = [
+            {
+                category: "Sequência Numérica",
+                title: "Padrão de Produtividade",
+                question: "Qual número completa a sequência de relatórios processados: 2 - 4 - 6 - 8 - ?",
+                options: ["A) 9", "B) 10", "C) 12", "D) 14"],
+                correct: 1,
+                explanation: "A sequência avança somando +2 a cada elemento."
+            },
+            {
+                category: "Organização",
+                title: "Horário de Reunião",
+                question: "A reunião dura 45 minutos e deve terminar exatamente às 11:15. Que horas ela deve começar?",
+                options: ["A) 10:20", "B) 10:25", "C) 10:30", "D) 10:35"],
+                correct: 2,
+                explanation: "11:15 menos 45 minutos é igual a 10:30."
+            },
+            {
+                category: "Atenção Visual",
+                title: "Verificação de Arquivos",
+                question: "Qual das alternativas contém a palavra 'SECRETÁRIO' escrita 100% correta?",
+                options: ["A) SECRATÁRIO", "B) SECRETÁRIO", "C) SECRETARIO", "D) SECRETRÁIO"],
+                correct: 1,
+                explanation: "A opção B é a única com a grafia e acentuação corretas."
+            },
+            {
+                category: "Matemática Simples",
+                title: "Pedido de Suprimentos",
+                question: "Cada caixa possui 12 canetas. O escritório precisa de 60 canetas. Quantas caixas você deve pedir?",
+                options: ["A) 4 caixas", "B) 5 caixas", "C) 6 caixas", "D) 10 caixas"],
+                correct: 1,
+                explanation: "60 dividido por 12 é igual a 5 caixas."
+            },
+            {
+                category: "Lógica Geral",
+                title: "Regra do Escritório",
+                question: "Verdadeiro ou Falso: Se todos os diretores usam crachá azul e Marcos é diretor, logo Marcos usa crachá azul.",
+                options: ["A) Verdadeiro", "B) Falso"],
+                correct: 0,
+                explanation: "Aplicação direta do silogismo lógico dedutivo."
+            }
+        ];
+
+        const part2Questions = [
+            {
+                id: "p2_q1",
+                category: "Dedução Complexa",
+                title: "Agenda dos Executivos",
+                question: "O Chefe só atende o Diretor A antes das 14h. O Diretor B só pode após o Diretor A. Que horas agendar o Diretor B?",
+                options: [
+                    "A) 11:00 (A) e 13:00 (B)",
+                    "B) 10:00 (A) e 15:00 (B)",
+                    "C) 15:00 (A) e 16:00 (B)",
+                    "D) 16:00 (A) e 10:00 (B)"
+                ],
+                correct: 1,
+                trustImpact: 10,
+                explanation: "Agendar A às 10h respeita a regra 'antes das 14h', e B às 15h atende à condição de vir depois de A."
+            },
+            {
+                id: "p2_q2",
+                category: "Tomada de Decisão",
+                title: "Conflito de Prioridades",
+                question: "O sistema da empresa caiu e um cliente VIP está esperando na linha ao mesmo tempo. O que você faz?",
+                options: [
+                    "A) Desliga o telefone para tentar consertar o servidor sozinho.",
+                    "B) Atende o cliente VIP, explica com paciência a instabilidade e anota o recado.",
+                    "C) Ignora o cliente e espera o sistema voltar espontaneamente.",
+                    "D) Transfere o cliente VIP para o ramal pessoal do Chefe sem avisar."
+                ],
+                correct: 1,
+                trustImpact: 15,
+                explanation: "Atendimento cortês com transparência protege a reputação da empresa em momentos imprevistos."
+            },
+            {
+                id: "p2_q3",
+                category: "Sequência de Alta Complexidade",
+                title: "Código de Acesso ao Cofre",
+                question: "Descubra o próximo elemento do código: 3, 5, 9, 17, 33, ?",
+                options: ["A) 45", "B) 50", "C) 65", "D) 66"],
+                correct: 2,
+                trustImpact: 10,
+                explanation: "A diferença entre os números dobra a cada passo (+2, +4, +8, +16, +32). Logo, 33 + 32 = 65."
+            },
+            {
+                id: "p2_q4",
+                category: "Análise de Riscos & Condições",
+                title: "Entrega de Documentos Urgentíssimos",
+                question: "Doc X só pode ser enviado se Doc Y estiver assinado. Doc Y precisa de aprovação fiscal. O fiscal está em almoço. O que fazer?",
+                options: [
+                    "A) Enviar o Doc X imediatamente sem assinaturas para adiantar.",
+                    "B) Forjar a assinatura do fiscal para acelerar o processo.",
+                    "C) Aguardar o retorno do fiscal, deixando a documentação 100% pronta para assinatura.",
+                    "D) Cancelar todos os documentos e remarcar o envio para o mês que vem."
+                ],
+                correct: 2,
+                trustImpact: 10,
+                explanation: "Manter conformidade legal e preparar tudo para agilizar ao máximo garante segurança operacional."
+            },
+            {
+                id: "p2_q5",
+                category: "Enigma de Lógica Combinatória",
+                title: "A Sala de Reunião",
+                question: "Na sala há 3 diretores. Cada diretor cumprimenta cada um dos outros com um aperto de mão. Quantos apertos ocorreram?",
+                options: ["A) 3 apertos", "B) 6 apertos", "C) 9 apertos", "D) 2 apertos"],
+                correct: 0,
+                trustImpact: 10,
+                explanation: "Pessoa 1 cumprimenta 2 e 3 (2 apertos). Pessoa 2 cumprimenta 3 (1 aperto). Total = 3 apertos de mão."
+            }
+        ];
+
+        let gameState = {
+            currentPart: 1,
+            currentQuestionIndex: 0,
+            score: 0,
+            hits: 0,
+            totalHitsP1: 0,
+            trust: 50,
+            highScore: 0,
+            userChoicesP2: []
+        };
+
+        // SISTEMA DE TIMER
+        let timerInterval = null;
+        let timeLeft = 25;
+        let maxTime = 25;
+
+        const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+        let audioCtx = null;
+
+        function getAudioContext() {
+            if (!audioCtx) audioCtx = new AudioContextClass();
+            if (audioCtx.state === 'suspended') audioCtx.resume();
+            return audioCtx;
+        }
+
+        function playSound(type) {
+            try {
+                const ctx = getAudioContext();
+                const now = ctx.currentTime;
+
+                if (type === 'correct') {
+                    const osc = ctx.createOscillator();
+                    const gain = ctx.createGain();
+                    osc.connect(gain);
+                    gain.connect(ctx.destination);
+                    osc.frequency.setValueAtTime(587.33, now);
+                    osc.frequency.setValueAtTime(880, now + 0.1);
+                    gain.gain.setValueAtTime(0.1, now);
+                    gain.gain.exponentialRampToValueAtTime(0.01, now + 0.3);
+                    osc.start();
+                    osc.stop(now + 0.3);
+                } else if (type === 'wrong' || type === 'timeout') {
+                    const osc = ctx.createOscillator();
+                    const gain = ctx.createGain();
+                    osc.connect(gain);
+                    gain.connect(ctx.destination);
+                    osc.type = 'sawtooth';
+                    osc.frequency.setValueAtTime(220, now);
+                    osc.frequency.setValueAtTime(130.81, now + 0.15);
+                    gain.gain.setValueAtTime(0.15, now);
+                    gain.gain.exponentialRampToValueAtTime(0.01, now + 0.4);
+                    osc.start();
+                    osc.stop(now + 0.4);
+                } else if (type === 'click') {
+                    const osc = ctx.createOscillator();
+                    const gain = ctx.createGain();
+                    osc.connect(gain);
+                    gain.connect(ctx.destination);
+                    osc.frequency.setValueAtTime(400, now);
+                    gain.gain.setValueAtTime(0.05, now);
+                    gain.gain.exponentialRampToValueAtTime(0.01, now + 0.05);
+                    osc.start();
+                    osc.stop(now + 0.05);
+                } else if (type === 'tick') {
+                    const osc = ctx.createOscillator();
+                    const gain = ctx.createGain();
+                    osc.connect(gain);
+                    gain.connect(ctx.destination);
+                    osc.frequency.setValueAtTime(750, now);
+                    gain.gain.setValueAtTime(0.04, now);
+                    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.04);
+                    osc.start();
+                    osc.stop(now + 0.04);
+                } else if (type === 'alarm') {
+                    const osc = ctx.createOscillator();
+                    const gain = ctx.createGain();
+                    osc.connect(gain);
+                    gain.connect(ctx.destination);
+                    osc.type = 'triangle';
+                    osc.frequency.setValueAtTime(350, now);
+                    osc.frequency.setValueAtTime(700, now + 0.18);
+                    gain.gain.setValueAtTime(0.12, now);
+                    gain.gain.exponentialRampToValueAtTime(0.01, now + 0.4);
+                    osc.start();
+                    osc.stop(now + 0.4);
+                } else if (type === 'secret') {
+                    const osc = ctx.createOscillator();
+                    const gain = ctx.createGain();
+                    osc.connect(gain);
+                    gain.connect(ctx.destination);
+                    osc.type = 'square';
+                    osc.frequency.setValueAtTime(523.25, now);
+                    osc.frequency.setValueAtTime(659.25, now + 0.1);
+                    osc.frequency.setValueAtTime(783.99, now + 0.2);
+                    osc.frequency.setValueAtTime(1046.50, now + 0.3);
+                    gain.gain.setValueAtTime(0.12, now);
+                    gain.gain.exponentialRampToValueAtTime(0.01, now + 0.5);
+                    osc.start();
+                    osc.stop(now + 0.5);
+                } else if (type === 'drumroll') {
+                    const drumDuration = 2.4;
+                    const bufferSize = ctx.sampleRate * drumDuration;
+                    const noiseBuffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+                    const output = noiseBuffer.getChannelData(0);
+                    for (let i = 0; i < bufferSize; i++) output[i] = Math.random() * 2 - 1;
+                    const noise = ctx.createBufferSource();
+                    noise.buffer = noiseBuffer;
+                    const filter = ctx.createBiquadFilter();
+                    filter.type = 'lowpass';
+                    filter.frequency.setValueAtTime(180, now);
+                    filter.frequency.linearRampToValueAtTime(320, now + drumDuration);
+                    const gainNode = ctx.createGain();
+                    gainNode.gain.setValueAtTime(0.02, now);
+                    gainNode.gain.exponentialRampToValueAtTime(0.25, now + drumDuration - 0.2);
+                    gainNode.gain.setValueAtTime(0.3, now + drumDuration - 0.1);
+                    gainNode.gain.exponentialRampToValueAtTime(0.001, now + drumDuration + 0.3);
+                    noise.connect(filter);
+                    filter.connect(gainNode);
+                    gainNode.connect(ctx.destination);
+                    noise.start(now);
+                    noise.stop(now + drumDuration + 0.3);
+                    setTimeout(() => {
+                        try {
+                            const cymbalOsc = ctx.createOscillator();
+                            const cymbalGain = ctx.createGain();
+                            cymbalOsc.type = 'triangle';
+                            cymbalOsc.frequency.setValueAtTime(80, ctx.currentTime);
+                            cymbalOsc.frequency.exponentialRampToValueAtTime(30, ctx.currentTime + 0.4);
+                            cymbalGain.gain.setValueAtTime(0.35, ctx.currentTime);
+                            cymbalGain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.6);
+                            cymbalOsc.connect(cymbalGain);
+                            cymbalGain.connect(ctx.destination);
+                            cymbalOsc.start();
+                            cymbalOsc.stop(ctx.currentTime + 0.6);
+                        } catch (e) {}
+                    }, drumDuration * 1000);
+                }
+            } catch (e) {}
+        }
+
+        const screens = {
+            start: document.getElementById('screen-start'),
+            howToPlay: document.getElementById('screen-how-to-play'),
+            qr: document.getElementById('screen-qr'),
+            intro: document.getElementById('screen-intro'),
+            quiz: document.getElementById('screen-quiz'),
+            cutscene: document.getElementById('screen-cutscene'),
+            suspense: document.getElementById('screen-suspense'),
+            ending: document.getElementById('screen-ending')
+        };
+
+        const hud = document.getElementById('hud');
+        const timerContainer = document.getElementById('timer-container');
+        const timerDisplay = document.getElementById('timer-display');
+        const timerBar = document.getElementById('timer-bar');
+        const progressBarContainer = document.getElementById('progress-bar-container');
+        const progressBar = document.getElementById('progress-bar');
+
+        function init() {
+            loadHighScore();
+            setupEventListeners();
+            updateQRCodeDisplay();
+        }
+
+        function updateQRCodeDisplay() {
+            var url = document.getElementById('qr-url-input').value.trim();
+            if (!url) url = window.location.href;
+            if (!url.startsWith('http://') && !url.startsWith('https://')) {
+                url = 'https://' + url;
+            }
+            var canvas = document.getElementById('qr-canvas');
+            QRCode.drawCanvas(url, canvas);
+        }
+
+        function showScreen(screenKey) {
+            Object.values(screens).forEach(s => s.classList.add('hidden'));
+            screens[screenKey].classList.remove('hidden');
+        }
+
+        function updateHUD() {
+            document.getElementById('hud-part').textContent = gameState.currentPart;
+            document.getElementById('hud-hits').textContent = `${gameState.hits}/${gameState.currentPart === 1 ? 5 : 10}`;
+            document.getElementById('hud-score').textContent = gameState.score;
+            document.getElementById('hud-trust').textContent = `${gameState.trust}%`;
+            
+            const totalQ = 5;
+            const currentQ = gameState.currentQuestionIndex;
+            const pct = (currentQ / totalQ) * 100;
+            progressBar.style.width = `${pct}%`;
+        }
+
+        function startQuestionTimer() {
+            clearInterval(timerInterval);
+            maxTime = gameState.currentPart === 1 ? 25 : 15; // 25s na P1, 15s na P2 (mais rápido!)
+            timeLeft = maxTime;
+            
+            timerDisplay.textContent = `${timeLeft}s`;
+            timerDisplay.classList.remove('urgent');
+            timerBar.style.width = '100%';
+            timerContainer.classList.remove('hidden');
+
+            timerInterval = setInterval(() => {
+                timeLeft--;
+                timerDisplay.textContent = `${timeLeft}s`;
+                
+                const pct = (timeLeft / maxTime) * 100;
+                timerBar.style.width = `${pct}%`;
+
+                if (timeLeft <= 5) {
+                    timerDisplay.classList.add('urgent');
+                    playSound('tick');
+                }
+
+                if (timeLeft <= 0) {
+                    clearInterval(timerInterval);
+                    handleTimeOut();
+                }
+            }, 1000);
+        }
+
+        function stopQuestionTimer() {
+            clearInterval(timerInterval);
+            timerContainer.classList.add('hidden');
+        }
+
+        function handleTimeOut() {
+            playSound('timeout');
+            const questions = gameState.currentPart === 1 ? part1Questions : part2Questions;
+            const q = questions[gameState.currentQuestionIndex];
+            const optionBtns = document.querySelectorAll('.option-btn');
+
+            optionBtns.forEach(btn => btn.disabled = true);
+            optionBtns[q.correct].classList.add('correct');
+
+            if (gameState.currentPart === 2) {
+                gameState.trust = Math.max(0, gameState.trust - 20);
+                gameState.userChoicesP2.push({
+                    questionIndex: gameState.currentQuestionIndex,
+                    choice: -1 // Tempo esgotado
+                });
+            }
+
+            const feedbackBox = document.getElementById('feedback-container');
+            const feedbackStatus = document.getElementById('feedback-status');
+            const feedbackText = document.getElementById('feedback-text');
+
+            feedbackStatus.textContent = "⏱️ TEMPO ESGOTADO!";
+            feedbackStatus.style.color = "var(--danger)";
+            feedbackText.textContent = "Você demorou demais para decidir! " + q.explanation;
+            feedbackBox.classList.remove('hidden');
+            updateHUD();
+        }
+
+        function startGame() {
+            document.body.classList.remove('theme-part2');
+            gameState = {
+                currentPart: 1,
+                currentQuestionIndex: 0,
+                score: 0,
+                hits: 0,
+                totalHitsP1: 0,
+                trust: 50,
+                highScore: gameState.highScore,
+                userChoicesP2: []
+            };
+            hud.classList.remove('hidden');
+            progressBarContainer.classList.remove('hidden');
+            showScreen('intro');
+        }
+
+        function loadQuestion() {
+            const questions = gameState.currentPart === 1 ? part1Questions : part2Questions;
+            const q = questions[gameState.currentQuestionIndex];
+
+            updateHUD();
+
+            document.getElementById('question-category').textContent = q.category;
+            document.getElementById('question-title').textContent = q.title;
+            document.getElementById('question-text').textContent = q.question;
+
+            const optionsContainer = document.getElementById('options-container');
+            optionsContainer.innerHTML = '';
+
+            document.getElementById('feedback-container').classList.add('hidden');
+
+            q.options.forEach((optText, idx) => {
+                const btn = document.createElement('button');
+                btn.className = 'option-btn';
+                btn.textContent = optText;
+                btn.onclick = () => selectOption(idx);
+                optionsContainer.appendChild(btn);
+            });
+
+            startQuestionTimer();
+        }
+
+        function selectOption(selectedIndex) {
+            stopQuestionTimer();
+            playSound('click');
+            const questions = gameState.currentPart === 1 ? part1Questions : part2Questions;
+            const q = questions[gameState.currentQuestionIndex];
+            const optionBtns = document.querySelectorAll('.option-btn');
+
+            optionBtns.forEach(btn => btn.disabled = true);
+
+            if (gameState.currentPart === 2) {
+                gameState.userChoicesP2.push({
+                    questionIndex: gameState.currentQuestionIndex,
+                    choice: selectedIndex
+                });
+            }
+
+            const isCorrect = selectedIndex === q.correct;
+            const feedbackBox = document.getElementById('feedback-container');
+            const feedbackStatus = document.getElementById('feedback-status');
+            const feedbackText = document.getElementById('feedback-text');
+
+            if (isCorrect) {
+                playSound('correct');
+                optionBtns[selectedIndex].classList.add('correct');
+                gameState.hits++;
+                const points = gameState.currentPart === 1 ? 10 : 20;
+                gameState.score += points;
+                
+                if (gameState.currentPart === 2) {
+                    gameState.trust = Math.min(100, gameState.trust + (q.trustImpact || 10));
+                }
+
+                feedbackStatus.textContent = "✅ RESPOSTA CORRETA!";
+                feedbackStatus.style.color = "var(--success)";
+            } else {
+                playSound('wrong');
+                optionBtns[selectedIndex].classList.add('wrong');
+                optionBtns[q.correct].classList.add('correct');
+
+                if (gameState.currentPart === 2) {
+                    gameState.trust = Math.max(0, gameState.trust - 15);
+                }
+
+                feedbackStatus.textContent = "❌ RESPOSTA INCORRETA";
+                feedbackStatus.style.color = "var(--danger)";
+            }
+
+            feedbackText.textContent = q.explanation;
+            feedbackBox.classList.remove('hidden');
+            updateHUD();
+        }
+
+        function nextQuestion() {
+            playSound('click');
+            gameState.currentQuestionIndex++;
+            const questions = gameState.currentPart === 1 ? part1Questions : part2Questions;
+
+            if (gameState.currentQuestionIndex < questions.length) {
+                loadQuestion();
+            } else {
+                if (gameState.currentPart === 1) {
+                    gameState.totalHitsP1 = gameState.hits;
+                    startCutscene();
+                } else {
+                    triggerSuspenseBeforeEnding();
+                }
+            }
+        }
+
+        /* --- CUTSCENE NARRATIVA --- */
+        let cutsceneTimeouts = [];
+
+        function startCutscene() {
+            stopQuestionTimer();
+            showScreen('cutscene');
+            progressBarContainer.classList.add('hidden');
+            
+            const cutsceneContainer = document.getElementById('cutscene-text');
+            const alertBox = document.getElementById('difficulty-alert');
+            const continueBtn = document.getElementById('btn-start-p2');
+            
+            cutsceneContainer.innerHTML = '';
+            alertBox.classList.add('hidden');
+            continueBtn.classList.add('hidden');
+
+            const scriptNarrativo = [
+                "📁 Relatórios da primeira fase processados...",
+                "Você ajeita a gravata e respira aliviado pensando: 'Até que foi tranquilo!'",
+                "De repente... 🕪 TRRRRIIIM! O telefone vermelho da diretoria toca estridente.",
+                "Ao atender, a voz imponente do Diretor Executivo ecoa:",
+                "'- Venha até a minha sala imediatamente. Suas respostas chamaram atenção.'",
+                "Ao abrir a pesada porta de carvalho, as luzes da sala mudam para um tom carmesim de emergência...",
+                "O Chefe joga uma pasta de documentos confidenciais na mesa e dispara:",
+                "'- Aquelas primeiras 5 perguntas com 25 segundos eram apenas um teste de estagiário.'",
+                "'- Agora o tempo foi reduzido para 15 SEGUNDOS por questão! Raciocínio rápido e decisões de alto risco. Cada escolha definirá seu futuro aqui!'"
+            ];
+
+            scriptNarrativo.forEach((line, index) => {
+                let t = setTimeout(() => {
+                    const p = document.createElement('p');
+                    p.textContent = line;
+                    p.style.animation = "fadeIn 0.4s ease-in";
+                    p.style.marginBottom = "8px";
+                    
+                    if (index >= 6) {
+                        p.style.color = "#ff7b72";
+                        p.style.fontWeight = "bold";
+                    }
+
+                    cutsceneContainer.appendChild(p);
+                    cutsceneContainer.scrollTop = cutsceneContainer.scrollHeight;
+
+                    if (index === 5) {
+                        document.body.classList.add('theme-part2');
+                        playSound('alarm');
+                    }
+
+                    if (index === scriptNarrativo.length - 1) {
+                        alertBox.classList.remove('hidden');
+                        continueBtn.classList.remove('hidden');
+                    }
+                }, (index + 1) * 1150);
+                cutsceneTimeouts.push(t);
+            });
+        }
+
+        function skipCutscene() {
+            playSound('click');
+            cutsceneTimeouts.forEach(t => clearTimeout(t));
+            cutsceneTimeouts = [];
+            document.body.classList.add('theme-part2');
+            startPart2();
+        }
+
+        function startPart2() {
+            document.body.classList.add('theme-part2');
+            gameState.currentPart = 2;
+            gameState.currentQuestionIndex = 0;
+            progressBarContainer.classList.remove('hidden');
+            showScreen('quiz');
+            loadQuestion();
+        }
+
+        /* --- TELA DE SUSPENSE COM RUFAR DE TAMBORES --- */
+        function triggerSuspenseBeforeEnding() {
+            stopQuestionTimer();
+            hud.classList.add('hidden');
+            progressBarContainer.classList.add('hidden');
+            showScreen('suspense');
+
+            const suspenseBar = document.getElementById('suspense-bar');
+            suspenseBar.style.width = '0%';
+            
+            playSound('drumroll');
+
+            setTimeout(() => {
+                suspenseBar.style.width = '100%';
+            }, 50);
+
+            setTimeout(() => {
+                finishGame();
+            }, 2700);
+        }
+
+        /* --- SISTEMA DE FINAIS --- */
+        function finishGame() {
+            showScreen('ending');
+
+            const endingIcon = document.getElementById('ending-icon');
+            const endingTitle = document.getElementById('ending-title');
+            const endingBadge = document.getElementById('ending-badge');
+            const endingDesc = document.getElementById('ending-description');
+
+            document.getElementById('final-score').textContent = gameState.score;
+            document.getElementById('final-hits').textContent = `${gameState.hits}/10`;
+
+            if (gameState.score > gameState.highScore) {
+                gameState.highScore = gameState.score;
+                localStorage.setItem('secretario_highscore', gameState.score);
+            }
+
+            const transferredVipToBoss = gameState.userChoicesP2.some(c => c.questionIndex === 1 && c.choice === 3);
+            const forgedSignature = gameState.userChoicesP2.some(c => c.questionIndex === 3 && c.choice === 1);
+
+            if (transferredVipToBoss && forgedSignature) {
+                // 👑 FINAL SECRETO ENGRAÇADO
+                playSound('secret');
+                endingIcon.textContent = "🕶️👑";
+                endingTitle.textContent = "O NOVO DONO DA EMPRESA!";
+                endingBadge.textContent = "FINAL SECRETO: O GOLPE ACIDENTAL";
+                endingBadge.style.background = "var(--purple)";
+                endingBadge.style.boxShadow = "0 0 15px var(--purple)";
+                endingDesc.textContent = "Ao transferir o cliente VIP direto pro ramal do Chefe e forjar assinaturas fiscais na cara de pau, o cliente achou que você era o verdadeiro magnata excêntrico por trás de tudo! O contrato bilionário foi assinado, o Chefe virou seu estagiário e você agora é o Presidente do Conselho!";
+            } else if (gameState.hits === 0) {
+                // 😂 FINAL SECRETO
+                endingIcon.textContent = "😂";
+                endingTitle.textContent = "SECRETÁRIO DO ANO?";
+                endingBadge.textContent = "FINAL SECRETO: O PIOR SECRETÁRIO DA HISTÓRIA";
+                endingBadge.style.background = "var(--warning)";
+                endingDesc.textContent = "O Chefe olha para seus resultados em silêncio absoluto... Ele suspira e declara: 'Parabéns... Você acaba de ser promovido a CLIENTE!' Você tropeça na cadeira ao sair da sala e derruba a cafeteira na recepção.";
+            } else if (gameState.trust >= 80 && gameState.hits >= 8) {
+                // 🏆 FINAL BOM
+                endingIcon.textContent = "🏆";
+                endingTitle.textContent = "PROMOÇÃO CONCEDIDA!";
+                endingBadge.textContent = "FINAL: SECRETÁRIO DO ANO";
+                endingBadge.style.background = "var(--success)";
+                endingDesc.textContent = "Impressionante! Sua lógica impecável e agilidade sob pressão salvaram o dia. A diretoria aprovou sua promoção imediata com aumento salarial!";
+            } else if (gameState.trust >= 40 && gameState.hits >= 5) {
+                // 📋 FINAL NORMAL
+                endingIcon.textContent = "📋";
+                endingTitle.textContent = "PRIMEIRO DIA CONCLUÍDO";
+                endingBadge.textContent = "FINAL: META ALCANÇADA";
+                endingBadge.style.background = "var(--secondary-accent)";
+                endingDesc.textContent = "Você teve alguns deslizes e quase estourou o cronômetro, mas entregou o essencial. O Chefe aprovou seu período de experiência!";
+            } else {
+                // 📉 FINAL RUIM
+                endingIcon.textContent = "📉";
+                endingTitle.textContent = "CONTRATO RESCINDIDO";
+                endingBadge.textContent = "FINAL: DEMITIDO";
+                endingBadge.style.background = "var(--danger)";
+                endingDesc.textContent = "Suas decisões trouxeram um caos sem precedentes para o escritório e o tempo se esgotou. O Chefe pediu para você recolher seus pertences e nunca mais tocar no telefone da empresa.";
+            }
+        }
+
+        function loadHighScore() {
+            const saved = localStorage.getItem('secretario_highscore');
+            if (saved) {
+                gameState.highScore = parseInt(saved, 10);
+                document.getElementById('high-score-display').textContent = gameState.highScore;
+            }
+        }
+
+        function setupEventListeners() {
+            document.getElementById('btn-start').onclick = () => { playSound('click'); startGame(); };
+            document.getElementById('btn-how-to-play').onclick = () => { playSound('click'); showScreen('howToPlay'); };
+            document.getElementById('btn-open-qr').onclick = () => { playSound('click'); showScreen('qr'); };
+            document.getElementById('btn-final-qr').onclick = () => { playSound('click'); showScreen('qr'); };
+            document.getElementById('btn-back-from-qr').onclick = () => { playSound('click'); showScreen('start'); };
+            document.getElementById('btn-back-start').onclick = () => { playSound('click'); showScreen('start'); };
+            
+            document.getElementById('btn-update-qr').onclick = () => {
+                playSound('click');
+                updateQRCodeDisplay();
+            };
+
+            document.getElementById('btn-start-p1').onclick = () => { playSound('click'); showScreen('quiz'); loadQuestion(); };
+            document.getElementById('btn-next-question').onclick = nextQuestion;
+            document.getElementById('btn-skip-cutscene').onclick = skipCutscene;
+            document.getElementById('btn-start-p2').onclick = () => { playSound('click'); startPart2(); };
+            document.getElementById('btn-restart').onclick = () => { 
+                playSound('click'); 
+                document.body.classList.remove('theme-part2');
+                loadHighScore(); 
+                showScreen('start'); 
+            };
+        }
+
+        window.onload = init;
+    </script>
+</body>
+</html>
