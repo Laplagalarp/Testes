@@ -9,7 +9,7 @@ Este documento transforma o [roteiro](01_ROTEIRO.md) e o animatic em vídeo fina
 | Item | Status | Arquivo |
 |---|---|---|
 | Roteiro com falas, tempos, imagens e sons | ✅ pronto | `docs/01_ROTEIRO.md` |
-| Animatic 1080p30 com toda a camada gráfica, legendas e trilha no tempo final | ✅ renderizado | `output/ULTRAKILL_animatic_v1.mp4` |
+| Animatic com toda a camada gráfica, legendas e trilha no tempo final | ✅ renderizado (1080p local; 720p no repositório) | `output/ULTRAKILL_animatic_v1_720p.mp4` |
 | Trilha original de 180 BPM (stem de música, stem de efeitos e mix) | ✅ gerada | `output/audio/*.flac` |
 | EDL para Resolve/Premiere com 229 planos, já cortados na batida | ✅ pronta | `edit/ULTRAKILL_timeline.edl` |
 | Narração em SRT (guia do locutor e legenda) | ✅ pronta | `edit/narracao.srt` |
@@ -124,7 +124,7 @@ A lista completa e gerada automaticamente está em `edit/lista_de_captura.csv`, 
 ## 5. Montagem passo a passo (DaVinci Resolve; Premiere é análogo)
 
 1. **Projeto**: 1920×1080, **30 fps** (a EDL está em 30 fps NDF).
-2. Importe `output/ULTRAKILL_animatic_v1.mp4`, `output/audio/*.flac` e as gravações `G*.mov` e `A*.png`.
+2. Importe o animatic (`output/ULTRAKILL_animatic_v1.mp4`, gerado por `tools/render_animatic.py`, ou a versão 720p), `output/audio/*.flac` e as gravações `G*.mov` e `A*.png`.
 3. **File → Import → Timeline → `edit/ULTRAKILL_timeline.edl`**. Os 229 planos entram cortados na batida. Os clipes `ANIM` usam o próprio animatic para os cards, e os demais ficam offline até o relink.
 4. **Relink** para as pastas das gravações. Se o nome do arquivo for igual ao ID, o relink acontece de uma vez.
 5. Coloque o **animatic numa trilha acima, com 30% de opacidade**, como referência. Desligue-o no fim.

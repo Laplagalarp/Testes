@@ -5,7 +5,8 @@ Vídeo-ensaio de 5:12 sobre ULTRAKILL: roteiro, identidade visual, trilha origin
 ```
 docs/01_ROTEIRO.md              roteiro completo: fala, tempo, imagem e som de cada momento
 docs/02_PLANO_DE_PRODUCAO.md    identidade visual, captura, montagem, mix, direitos, checklist
-output/ULTRAKILL_animatic_v1.mp4  animatic 1080p30: grafismos, legendas e trilha no tempo final
+output/ULTRAKILL_animatic_v1_720p.mp4  animatic 720p30 (5:12): grafismos, legendas e trilha no tempo final
+                                (a versão 1080p tem cerca de 600 MB por causa do grão; regenere com tools/render_animatic.py)
 output/audio/                   trilha original em FLAC: stem de música e stem de SFX (o mix fica no MP4)
 edit/ULTRAKILL_timeline.edl     EDL CMX3600 com os 229 planos cortados na batida (Resolve/Premiere)
 edit/narracao.srt               narração com tempos (guia do locutor e legenda)
