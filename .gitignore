@@ -1,0 +1,5 @@
+ultrakill-video/output/audio/*.wav
+ultrakill-video/output/stills/
+ultrakill-video/output/render.log
+__pycache__/
+ultrakill-video/output/audio/mix_animatic.flac

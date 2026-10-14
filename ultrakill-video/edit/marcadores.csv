@@ -1,0 +1,72 @@
+timecode,tipo,detalhe
+00:00:00:00,CENA,C1 — ABERTURA — COLD OPEN
+00:00:00:20,SFX,type
+00:00:01:20,SFX,type
+00:00:02:20,SFX,type
+00:00:04:00,IMPACTO,intensidade 1.0
+00:00:09:10,SFX,riser_end
+00:00:13:00,IMPACTO,intensidade 1.0
+00:00:16:00,CENA,C2 — O QUE É ULTRAKILL?
+00:00:16:00,IMPACTO,intensidade 0.6
+00:00:35:00,IMPACTO,intensidade 0.7
+00:00:38:20,IMPACTO,intensidade 0.7
+00:00:42:00,IMPACTO,intensidade 0.9
+00:00:45:10,IMPACTO,intensidade 0.6
+00:01:03:00,SFX,riser_end
+00:01:04:00,CENA,C3 — A ARTE DO CAOS
+00:01:04:00,IMPACTO,intensidade 1.0
+00:01:08:00,IMPACTO,intensidade 0.6
+00:01:08:00,SFX,whoosh
+00:01:09:10,IMPACTO,intensidade 0.6
+00:01:09:10,SFX,whoosh
+00:01:10:20,IMPACTO,intensidade 0.6
+00:01:10:20,SFX,whoosh
+00:01:12:00,IMPACTO,intensidade 0.9
+00:01:12:00,SFX,slam
+00:01:22:20,IMPACTO,intensidade 0.6
+00:01:24:00,IMPACTO,intensidade 0.6
+00:01:25:10,IMPACTO,intensidade 0.6
+00:01:26:20,IMPACTO,intensidade 0.6
+00:01:28:00,IMPACTO,intensidade 0.8
+00:01:40:00,IMPACTO,intensidade 0.5
+00:01:40:20,SFX,coin
+00:01:41:10,SFX,coin
+00:01:44:20,SFX,coin
+00:01:45:00,SFX,coin
+00:01:45:10,SFX,coin
+00:01:45:20,SFX,coin
+00:01:50:00,SFX,rail
+00:01:56:00,IMPACTO,intensidade 0.9
+00:01:56:20,SFX,parry
+00:02:00:20,SFX,parry
+00:02:06:00,SFX,parry
+00:02:10:00,IMPACTO,intensidade 0.6
+00:02:10:00,SFX,ui
+00:02:10:20,SFX,ui
+00:02:11:10,SFX,ui
+00:02:12:00,SFX,ui
+00:02:12:20,SFX,ui
+00:02:13:10,SFX,ui
+00:02:14:00,SFX,ui
+00:02:14:20,IMPACTO,intensidade 1.0
+00:02:14:20,SFX,ui
+00:02:19:10,IMPACTO,intensidade 0.7
+00:02:20:20,IMPACTO,intensidade 0.7
+00:02:22:00,IMPACTO,intensidade 0.9
+00:02:24:00,CENA,C4 — O INFERNO E SUA ATMOSFERA
+00:03:10:20,SFX,breath
+00:03:12:00,IMPACTO,intensidade 1.0
+00:03:28:00,CENA,C5 — POR QUE É TÃO VICIANTE?
+00:03:28:00,IMPACTO,intensidade 0.6
+00:03:32:00,IMPACTO,intensidade 0.8
+00:03:32:00,SFX,ui
+00:04:18:00,IMPACTO,intensidade 0.7
+00:04:21:00,IMPACTO,intensidade 0.8
+00:04:24:00,CENA,C6 — ENCERRAMENTO
+00:04:24:00,IMPACTO,intensidade 0.8
+00:04:40:00,IMPACTO,intensidade 1.0
+00:04:56:00,SFX,cut
+00:04:57:00,IMPACTO,intensidade 0.9
+00:04:59:20,IMPACTO,intensidade 1.0
+00:05:02:20,IMPACTO,intensidade 1.0
+00:05:02:20,SFX,boom

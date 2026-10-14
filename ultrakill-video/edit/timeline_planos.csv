@@ -1,0 +1,230 @@
+#,cena,entrada,saida,duracao_s,frames,tipo,gravacao,transicao,velocidade,nota
+1,C1,00:00:00:00,00:00:04:00,4.000,120,type,,corte,100%,Tela preta. Frase oficial do jogo digitada letra a letra.
+2,C1,00:00:04:00,00:00:04:20,0.667,20,gp,G09,corte seco,100%,Montagem: 1 corte a cada 2 batidas
+3,C1,00:00:04:20,00:00:05:10,0.667,20,gp,G13,corte seco,100%,Montagem: 1 corte a cada 2 batidas
+4,C1,00:00:05:10,00:00:06:00,0.667,20,gp,G15,corte seco,100%,Montagem: 1 corte a cada 2 batidas
+5,C1,00:00:06:00,00:00:06:20,0.667,20,gp,G23,corte seco,100%,Montagem: 1 corte a cada 2 batidas
+6,C1,00:00:06:20,00:00:07:10,0.667,20,gp,G18,corte seco,100%,Montagem: 1 corte a cada 2 batidas
+7,C1,00:00:07:10,00:00:08:00,0.667,20,gp,G08,corte seco,100%,Montagem: 1 corte a cada 2 batidas
+8,C1,00:00:08:00,00:00:08:20,0.667,20,gp,G14,corte seco,100%,Montagem: 1 corte a cada 2 batidas
+9,C1,00:00:08:20,00:00:09:10,0.666,20,gp,G28,corte seco,100%,Montagem: 1 corte a cada 2 batidas
+10,C1,00:00:09:10,00:00:09:20,0.333,10,gp,G28,corte seco,100%,Montagem: 1 corte por batida
+11,C1,00:00:09:20,00:00:10:00,0.333,10,gp,G16,corte seco,100%,Montagem: 1 corte por batida
+12,C1,00:00:10:00,00:00:10:10,0.333,10,gp,G06,corte seco,100%,Montagem: 1 corte por batida
+13,C1,00:00:10:10,00:00:10:20,0.333,10,gp,G23,corte seco,100%,Montagem: 1 corte por batida
+14,C1,00:00:10:20,00:00:11:00,0.333,10,gp,G12,corte seco,100%,Montagem: 1 corte por batida
+15,C1,00:00:11:00,00:00:11:10,0.333,10,gp,G07,corte seco,100%,Montagem: 1 corte por batida
+16,C1,00:00:11:10,00:00:11:20,0.333,10,gp,G26,corte seco,100%,Montagem: 1 corte por batida
+17,C1,00:00:11:20,00:00:12:00,0.333,10,gp,G04,corte seco,100%,Montagem: 1 corte por batida
+18,C1,00:00:12:00,00:00:12:10,0.333,10,gp,G11,corte seco,100%,Montagem: 1 corte por batida
+19,C1,00:00:12:10,00:00:12:20,0.333,10,gp,G17,corte seco,100%,Montagem: 1 corte por batida
+20,C1,00:00:12:20,00:00:12:20,0.000,0,gp,G28,corte seco,100%,Montagem: 1 corte por batida
+21,C1,00:00:12:20,00:00:13:00,0.333,10,flash,,corte,100%,Flash branco 1 batida
+22,C1,00:00:13:00,00:00:16:00,3.000,90,card,,corte no impacto,100%,TÍTULO: ULTRAKILL — A ARTE DO CAOS
+23,C2,00:00:16:00,00:00:20:00,4.000,120,gp,G01,corte,100%,Primeiro combate. Legenda: Arsi 'Hakita' Patala / New Blood Interactive
+24,C2,00:00:20:00,00:00:24:00,4.000,120,gp,A02,corte,100%,Key art de V1 com zoom lento (Ken Burns 100→108%)
+25,C2,00:00:24:00,00:00:28:00,4.000,120,gp,G09,corte,100%,Filtro CRT/scanline leve para remeter aos FPS dos anos 90
+26,C2,00:00:28:00,00:00:34:20,6.667,200,gp,G18,corte,100%,Zoom digital no medidor de estilo
+27,C2,00:00:34:20,00:00:35:00,0.333,10,black,,corte,100%,1 batida de preto — a música cai
+28,C2,00:00:35:00,00:00:38:20,3.667,110,card,,corte,100%,MANKIND IS DEAD.
+29,C2,00:00:38:20,00:00:42:00,3.333,100,card,,corte,100%,BLOOD IS FUEL.
+30,C2,00:00:42:00,00:00:45:10,3.333,100,card,,corte,100%,HELL IS FULL.
+31,C2,00:00:45:10,00:00:51:00,5.667,170,gp,A02,whip pan,100%,V1 — corte para a descida (G20a ao fundo)
+32,C2,00:00:51:00,00:00:58:00,7.000,210,gp,G04,corte,rampa,Cura por sangue: rampa de velocidade 100% → 30% → 100%
+33,C2,00:00:58:00,00:01:04:00,6.000,180,gp,G09,corte,100%,"Avanço agressivo, sem parar"
+34,C3,00:01:04:00,00:01:06:20,2.667,80,card,,corte no drop,100%,A ARTE DO CAOS (impacto)
+35,C3,00:01:06:20,00:01:08:00,1.333,40,gp,G09,corte,100%,V1 acelerando
+36,C3,00:01:08:00,00:01:09:10,1.333,40,gp,G05,corte,100%,TAG: DASH
+37,C3,00:01:09:10,00:01:10:20,1.333,40,gp,G06,corte,100%,TAG: SLIDE
+38,C3,00:01:10:20,00:01:12:00,1.333,40,gp,G07,corte,100%,TAG: WALL JUMP
+39,C3,00:01:12:00,00:01:13:10,1.333,40,gp,G08,corte,100%,TAG: SLAM
+40,C3,00:01:13:10,00:01:16:00,2.667,80,gp,G06,corte,100%,Slide → pulo longo (linha de trajetória desenhada)
+41,C3,00:01:16:00,00:01:18:20,2.667,80,gp,G08,corte,100%,Slam → salto alto (linha de trajetória desenhada)
+42,C3,00:01:18:20,00:01:22:20,4.000,120,gp,G09,corte,100%,Plano longo vertical — a arena vira 3D
+43,C3,00:01:22:20,00:01:24:00,1.333,40,gp,G10,corte,100%,TAG: REVOLVER
+44,C3,00:01:24:00,00:01:25:10,1.333,40,gp,G10,corte,100%,TAG: SHOTGUN
+45,C3,00:01:25:10,00:01:26:20,1.333,40,gp,G10,corte,100%,TAG: NAILGUN
+46,C3,00:01:26:20,00:01:28:00,1.333,40,gp,G10,corte,100%,TAG: RAILCANNON
+47,C3,00:01:28:00,00:01:29:10,1.333,40,gp,G10,corte,100%,TAG: ROCKET LAUNCHER
+48,C3,00:01:29:10,00:01:30:00,0.667,20,gp,G11,corte seco,100%,Variantes — 1 corte a cada 2 batidas
+49,C3,00:01:30:00,00:01:30:20,0.667,20,gp,G11,corte seco,100%,Variantes — 1 corte a cada 2 batidas
+50,C3,00:01:30:20,00:01:31:10,0.667,20,gp,G11,corte seco,100%,Variantes — 1 corte a cada 2 batidas
+51,C3,00:01:31:10,00:01:32:00,0.667,20,gp,G11,corte seco,100%,Variantes — 1 corte a cada 2 batidas
+52,C3,00:01:32:00,00:01:32:20,0.667,20,gp,G11,corte seco,100%,Variantes — 1 corte a cada 2 batidas
+53,C3,00:01:32:20,00:01:33:10,0.667,20,gp,G11,corte seco,100%,Variantes — 1 corte a cada 2 batidas
+54,C3,00:01:33:10,00:01:34:00,0.667,20,gp,G11,corte seco,100%,Variantes — 1 corte a cada 2 batidas
+55,C3,00:01:34:00,00:01:34:20,0.667,20,gp,G11,corte seco,100%,Variantes — 1 corte a cada 2 batidas
+56,C3,00:01:34:20,00:01:35:10,0.667,20,gp,G11,corte seco,100%,Variantes — 1 corte a cada 2 batidas
+57,C3,00:01:35:10,00:01:36:00,0.666,20,gp,G11,corte seco,100%,Variantes — 1 corte a cada 2 batidas
+58,C3,00:01:36:00,00:01:40:00,4.000,120,gp,G10,corte,100%,Trocas de arma no meio do combo (HUD de estilo visível)
+59,C3,00:01:40:00,00:01:44:00,4.000,120,gp,G12,corte,100%,Moeda simples — som de moeda em destaque
+60,C3,00:01:44:00,00:01:49:10,5.333,160,gp,G13,corte,100%,Corrente de moedas — freeze-frame de 2 batidas com linhas ligando as moedas
+61,C3,00:01:49:10,00:01:53:10,4.000,120,gp,G14,corte,100%,Railcoin
+62,C3,00:01:53:10,00:01:56:00,2.667,80,gp,G13,corte,50%,Replay da corrente em velocidade 50%
+63,C3,00:01:56:00,00:02:00:00,4.000,120,gp,G15,corte,100%,Parry de projétil — flash + zoom punch
+64,C3,00:02:00:00,00:02:05:10,5.333,160,gp,G16,corte,100%,Projectile boost — repetir o soco 2x (rewind de 6 frames)
+65,C3,00:02:05:10,00:02:10:00,4.667,140,gp,G17,corte,100%,Parry corpo a corpo
+66,C3,00:02:10:00,00:02:15:10,5.333,160,gp,G18,corte,100%,"Ranks de estilo pipocando na tela, 1 por 2 batidas"
+67,C3,00:02:15:10,00:02:19:10,4.000,120,gp,G19,corte,100%,Freshness caindo (destacar com zoom e círculo)
+68,C3,00:02:19:10,00:02:19:20,0.333,10,gp,G28,corte seco,100%,Fecho de cena — 1 corte por batida
+69,C3,00:02:19:20,00:02:20:00,0.333,10,gp,G23,corte seco,100%,Fecho de cena — 1 corte por batida
+70,C3,00:02:20:00,00:02:20:10,0.333,10,gp,G13,corte seco,100%,Fecho de cena — 1 corte por batida
+71,C3,00:02:20:10,00:02:20:20,0.333,10,gp,G09,corte seco,100%,Fecho de cena — 1 corte por batida
+72,C3,00:02:20:20,00:02:21:00,0.333,10,gp,G28,corte seco,100%,Fecho de cena — 1 corte por batida
+73,C3,00:02:21:00,00:02:21:10,0.333,10,gp,G23,corte seco,100%,Fecho de cena — 1 corte por batida
+74,C3,00:02:21:10,00:02:21:20,0.333,10,gp,G13,corte seco,100%,Fecho de cena — 1 corte por batida
+75,C3,00:02:21:20,00:02:22:00,0.333,10,gp,G09,corte seco,100%,Fecho de cena — 1 corte por batida
+76,C3,00:02:22:00,00:02:22:10,0.333,10,gp,G28,corte seco,100%,Fecho de cena — 1 corte por batida
+77,C3,00:02:22:10,00:02:22:20,0.333,10,gp,G23,corte seco,100%,Fecho de cena — 1 corte por batida
+78,C3,00:02:22:20,00:02:23:00,0.333,10,gp,G13,corte seco,100%,Fecho de cena — 1 corte por batida
+79,C3,00:02:23:00,00:02:23:10,0.333,10,gp,G09,corte seco,100%,Fecho de cena — 1 corte por batida
+80,C3,00:02:23:10,00:02:23:20,0.333,10,gp,G28,corte seco,100%,Fecho de cena — 1 corte por batida
+81,C3,00:02:23:20,00:02:24:00,0.333,10,gp,G23,corte seco,100%,Fecho de cena — 1 corte por batida
+82,C3,00:02:24:00,00:02:24:00,0.000,0,gp,G13,corte seco,100%,Fecho de cena — 1 corte por batida
+83,C4,00:02:24:00,00:02:30:00,6.000,180,gp,G20a,dissolve 1 s,100%,Limbo — crossfade lento
+84,C4,00:02:30:00,00:02:35:00,5.000,150,gp,G20b,dissolve 1 s,100%,Lust
+85,C4,00:02:35:00,00:02:40:00,5.000,150,gp,G20c,dissolve 1 s,100%,Gluttony
+86,C4,00:02:40:00,00:02:45:00,5.000,150,gp,G20d,dissolve 1 s,100%,Greed
+87,C4,00:02:45:00,00:02:50:00,5.000,150,gp,G20e,dissolve 1 s,100%,Wrath
+88,C4,00:02:50:00,00:02:55:00,5.000,150,gp,G20f,dissolve 1 s,100%,Heresy / Violence
+89,C4,00:02:55:00,00:02:56:22,1.750,52,gp,G21,corte,100%,Filth
+90,C4,00:02:56:22,00:02:58:15,1.750,52,gp,G21,corte,100%,Stray
+91,C4,00:02:58:15,00:03:00:08,1.750,52,gp,G21,corte,100%,Malicious Face
+92,C4,00:03:00:08,00:03:02:00,1.750,52,gp,G21,corte,100%,Mindflayer
+93,C4,00:03:02:00,00:03:06:10,4.333,130,gp,G22,dip to black,100%,V2 — entrada
+94,C4,00:03:06:10,00:03:10:20,4.333,130,gp,G22,dip to black,100%,Gabriel — entrada
+95,C4,00:03:10:20,00:03:12:00,1.333,40,black,,corte,100%,Silêncio total (4 batidas). Só respiração/eco.
+96,C4,00:03:12:00,00:03:12:10,0.333,10,gp,G23,corte seco + flash,100%,"DROP — chefe em fúria, 1 corte por batida"
+97,C4,00:03:12:10,00:03:12:20,0.333,10,gp,G17,corte seco + flash,100%,"DROP — chefe em fúria, 1 corte por batida"
+98,C4,00:03:12:20,00:03:13:00,0.333,10,gp,G23,corte seco + flash,100%,"DROP — chefe em fúria, 1 corte por batida"
+99,C4,00:03:13:00,00:03:13:10,0.333,10,gp,G15,corte seco + flash,100%,"DROP — chefe em fúria, 1 corte por batida"
+100,C4,00:03:13:10,00:03:13:20,0.333,10,gp,G23,corte seco + flash,100%,"DROP — chefe em fúria, 1 corte por batida"
+101,C4,00:03:13:20,00:03:14:00,0.333,10,gp,G28,corte seco + flash,100%,"DROP — chefe em fúria, 1 corte por batida"
+102,C4,00:03:14:00,00:03:14:10,0.333,10,gp,G23,corte seco + flash,100%,"DROP — chefe em fúria, 1 corte por batida"
+103,C4,00:03:14:10,00:03:14:20,0.333,10,gp,G17,corte seco + flash,100%,"DROP — chefe em fúria, 1 corte por batida"
+104,C4,00:03:14:20,00:03:15:00,0.333,10,gp,G23,corte seco + flash,100%,"DROP — chefe em fúria, 1 corte por batida"
+105,C4,00:03:15:00,00:03:15:10,0.333,10,gp,G15,corte seco + flash,100%,"DROP — chefe em fúria, 1 corte por batida"
+106,C4,00:03:15:10,00:03:15:20,0.333,10,gp,G23,corte seco + flash,100%,"DROP — chefe em fúria, 1 corte por batida"
+107,C4,00:03:15:20,00:03:16:00,0.333,10,gp,G28,corte seco + flash,100%,"DROP — chefe em fúria, 1 corte por batida"
+108,C4,00:03:16:00,00:03:16:10,0.333,10,gp,G23,corte seco + flash,100%,"DROP — chefe em fúria, 1 corte por batida"
+109,C4,00:03:16:10,00:03:16:20,0.333,10,gp,G17,corte seco + flash,100%,"DROP — chefe em fúria, 1 corte por batida"
+110,C4,00:03:16:20,00:03:17:00,0.333,10,gp,G23,corte seco + flash,100%,"DROP — chefe em fúria, 1 corte por batida"
+111,C4,00:03:17:00,00:03:17:10,0.333,10,gp,G15,corte seco + flash,100%,"DROP — chefe em fúria, 1 corte por batida"
+112,C4,00:03:17:10,00:03:17:20,0.333,10,gp,G23,corte seco + flash,100%,"DROP — chefe em fúria, 1 corte por batida"
+113,C4,00:03:17:20,00:03:18:00,0.333,10,gp,G28,corte seco + flash,100%,"DROP — chefe em fúria, 1 corte por batida"
+114,C4,00:03:18:00,00:03:18:10,0.333,10,gp,G23,corte seco + flash,100%,"DROP — chefe em fúria, 1 corte por batida"
+115,C4,00:03:18:10,00:03:18:20,0.333,10,gp,G17,corte seco + flash,100%,"DROP — chefe em fúria, 1 corte por batida"
+116,C4,00:03:18:20,00:03:19:00,0.333,10,gp,G23,corte seco + flash,100%,"DROP — chefe em fúria, 1 corte por batida"
+117,C4,00:03:19:00,00:03:19:10,0.333,10,gp,G15,corte seco + flash,100%,"DROP — chefe em fúria, 1 corte por batida"
+118,C4,00:03:19:10,00:03:19:20,0.333,10,gp,G23,corte seco + flash,100%,"DROP — chefe em fúria, 1 corte por batida"
+119,C4,00:03:19:20,00:03:20:00,0.333,10,gp,G28,corte seco + flash,100%,"DROP — chefe em fúria, 1 corte por batida"
+120,C4,00:03:20:00,00:03:20:10,0.333,10,gp,G23,corte seco + flash,100%,"DROP — chefe em fúria, 1 corte por batida"
+121,C4,00:03:20:10,00:03:20:20,0.333,10,gp,G17,corte seco + flash,100%,"DROP — chefe em fúria, 1 corte por batida"
+122,C4,00:03:20:20,00:03:21:00,0.333,10,gp,G23,corte seco + flash,100%,"DROP — chefe em fúria, 1 corte por batida"
+123,C4,00:03:21:00,00:03:21:10,0.333,10,gp,G15,corte seco + flash,100%,"DROP — chefe em fúria, 1 corte por batida"
+124,C4,00:03:21:10,00:03:21:20,0.333,10,gp,G23,corte seco + flash,100%,"DROP — chefe em fúria, 1 corte por batida"
+125,C4,00:03:21:20,00:03:22:00,0.333,10,gp,G28,corte seco + flash,100%,"DROP — chefe em fúria, 1 corte por batida"
+126,C4,00:03:22:00,00:03:22:10,0.333,10,gp,G23,corte seco + flash,100%,"DROP — chefe em fúria, 1 corte por batida"
+127,C4,00:03:22:10,00:03:22:20,0.333,10,gp,G17,corte seco + flash,100%,"DROP — chefe em fúria, 1 corte por batida"
+128,C4,00:03:22:20,00:03:23:00,0.333,10,gp,G23,corte seco + flash,100%,"DROP — chefe em fúria, 1 corte por batida"
+129,C4,00:03:23:00,00:03:23:10,0.333,10,gp,G15,corte seco + flash,100%,"DROP — chefe em fúria, 1 corte por batida"
+130,C4,00:03:23:10,00:03:23:20,0.333,10,gp,G23,corte seco + flash,100%,"DROP — chefe em fúria, 1 corte por batida"
+131,C4,00:03:23:20,00:03:24:00,0.333,10,gp,G28,corte seco + flash,100%,"DROP — chefe em fúria, 1 corte por batida"
+132,C4,00:03:24:00,00:03:24:10,0.333,10,gp,G23,corte seco + flash,100%,"DROP — chefe em fúria, 1 corte por batida"
+133,C4,00:03:24:10,00:03:24:20,0.333,10,gp,G17,corte seco + flash,100%,"DROP — chefe em fúria, 1 corte por batida"
+134,C4,00:03:24:20,00:03:25:00,0.333,10,gp,G23,corte seco + flash,100%,"DROP — chefe em fúria, 1 corte por batida"
+135,C4,00:03:25:00,00:03:25:10,0.333,10,gp,G15,corte seco + flash,100%,"DROP — chefe em fúria, 1 corte por batida"
+136,C4,00:03:25:10,00:03:25:20,0.333,10,gp,G23,corte seco + flash,100%,"DROP — chefe em fúria, 1 corte por batida"
+137,C4,00:03:25:20,00:03:26:00,0.333,10,gp,G28,corte seco + flash,100%,"DROP — chefe em fúria, 1 corte por batida"
+138,C4,00:03:26:00,00:03:26:10,0.333,10,gp,G23,corte seco + flash,100%,"DROP — chefe em fúria, 1 corte por batida"
+139,C4,00:03:26:10,00:03:26:20,0.333,10,gp,G17,corte seco + flash,100%,"DROP — chefe em fúria, 1 corte por batida"
+140,C4,00:03:26:20,00:03:27:00,0.333,10,gp,G23,corte seco + flash,100%,"DROP — chefe em fúria, 1 corte por batida"
+141,C4,00:03:27:00,00:03:27:10,0.333,10,gp,G15,corte seco + flash,100%,"DROP — chefe em fúria, 1 corte por batida"
+142,C4,00:03:27:10,00:03:27:20,0.333,10,gp,G23,corte seco + flash,100%,"DROP — chefe em fúria, 1 corte por batida"
+143,C4,00:03:27:20,00:03:28:00,0.333,10,gp,G28,corte seco + flash,100%,"DROP — chefe em fúria, 1 corte por batida"
+144,C4,00:03:28:00,00:03:28:00,0.002,0,gp,G23,corte seco + flash,100%,"DROP — chefe em fúria, 1 corte por batida"
+145,C5,00:03:28:00,00:03:32:00,4.000,120,gp,G24,corte,100%,Tela de resultado — ranks contando
+146,C5,00:03:32:00,00:03:40:00,8.000,240,gp,G24,corte,100%,P-RANK — zoom + glow dourado
+147,C5,00:03:40:00,00:03:52:00,12.000,360,split,G25,corte,100%,Split screen 3 colunas: tentativa 1 / 2 / 3 sincronizadas no mesmo ponto
+148,C5,00:03:52:00,00:04:00:00,8.000,240,gp,G27,corte,100%,Experimentação no Sandbox
+149,C5,00:04:00:00,00:04:08:00,8.000,240,gp,G26,corte,100%,Cyber Grind
+150,C5,00:04:08:00,00:04:18:00,10.000,300,gp,G28,corte,100%,"Execução limpa — sem cortes, deixar respirar"
+151,C5,00:04:18:00,00:04:24:00,6.000,180,card,,corte,100%,NÃO É SOBRE ATIRAR. / É SOBRE PERFORMANCE.
+152,C6,00:04:24:00,00:04:24:20,0.667,20,gp,G28,corte seco,100%,Build — 1 corte a cada 2 batidas
+153,C6,00:04:24:20,00:04:25:10,0.667,20,gp,G13,corte seco,100%,Build — 1 corte a cada 2 batidas
+154,C6,00:04:25:10,00:04:26:00,0.667,20,gp,G23,corte seco,100%,Build — 1 corte a cada 2 batidas
+155,C6,00:04:26:00,00:04:26:20,0.667,20,gp,G09,corte seco,100%,Build — 1 corte a cada 2 batidas
+156,C6,00:04:26:20,00:04:27:10,0.667,20,gp,G14,corte seco,100%,Build — 1 corte a cada 2 batidas
+157,C6,00:04:27:10,00:04:28:00,0.667,20,gp,G16,corte seco,100%,Build — 1 corte a cada 2 batidas
+158,C6,00:04:28:00,00:04:28:20,0.667,20,gp,G28,corte seco,100%,Build — 1 corte a cada 2 batidas
+159,C6,00:04:28:20,00:04:29:10,0.667,20,gp,G13,corte seco,100%,Build — 1 corte a cada 2 batidas
+160,C6,00:04:29:10,00:04:30:00,0.667,20,gp,G23,corte seco,100%,Build — 1 corte a cada 2 batidas
+161,C6,00:04:30:00,00:04:30:20,0.667,20,gp,G09,corte seco,100%,Build — 1 corte a cada 2 batidas
+162,C6,00:04:30:20,00:04:31:10,0.667,20,gp,G14,corte seco,100%,Build — 1 corte a cada 2 batidas
+163,C6,00:04:31:10,00:04:32:00,0.667,20,gp,G16,corte seco,100%,Build — 1 corte a cada 2 batidas
+164,C6,00:04:32:00,00:04:32:20,0.667,20,gp,G28,corte seco,100%,Build — 1 corte a cada 2 batidas
+165,C6,00:04:32:20,00:04:33:10,0.667,20,gp,G13,corte seco,100%,Build — 1 corte a cada 2 batidas
+166,C6,00:04:33:10,00:04:34:00,0.667,20,gp,G23,corte seco,100%,Build — 1 corte a cada 2 batidas
+167,C6,00:04:34:00,00:04:34:20,0.667,20,gp,G09,corte seco,100%,Build — 1 corte a cada 2 batidas
+168,C6,00:04:34:20,00:04:35:10,0.667,20,gp,G14,corte seco,100%,Build — 1 corte a cada 2 batidas
+169,C6,00:04:35:10,00:04:36:00,0.667,20,gp,G16,corte seco,100%,Build — 1 corte a cada 2 batidas
+170,C6,00:04:36:00,00:04:36:20,0.667,20,gp,G28,corte seco,100%,Build — 1 corte a cada 2 batidas
+171,C6,00:04:36:20,00:04:37:10,0.667,20,gp,G13,corte seco,100%,Build — 1 corte a cada 2 batidas
+172,C6,00:04:37:10,00:04:38:00,0.667,20,gp,G23,corte seco,100%,Build — 1 corte a cada 2 batidas
+173,C6,00:04:38:00,00:04:38:20,0.667,20,gp,G09,corte seco,100%,Build — 1 corte a cada 2 batidas
+174,C6,00:04:38:20,00:04:39:10,0.667,20,gp,G14,corte seco,100%,Build — 1 corte a cada 2 batidas
+175,C6,00:04:39:10,00:04:40:00,0.666,20,gp,G16,corte seco,100%,Build — 1 corte a cada 2 batidas
+176,C6,00:04:40:00,00:04:40:10,0.333,10,gp,G28,corte seco,100%,Clímax — 1 corte por batida
+177,C6,00:04:40:10,00:04:40:20,0.333,10,gp,G18,corte seco,100%,Clímax — 1 corte por batida
+178,C6,00:04:40:20,00:04:41:00,0.333,10,gp,G23,corte seco,100%,Clímax — 1 corte por batida
+179,C6,00:04:41:00,00:04:41:10,0.333,10,gp,G13,corte seco,100%,Clímax — 1 corte por batida
+180,C6,00:04:41:10,00:04:41:20,0.333,10,gp,G17,corte seco,100%,Clímax — 1 corte por batida
+181,C6,00:04:41:20,00:04:42:00,0.333,10,gp,G26,corte seco,100%,Clímax — 1 corte por batida
+182,C6,00:04:42:00,00:04:42:10,0.333,10,gp,G14,corte seco,100%,Clímax — 1 corte por batida
+183,C6,00:04:42:10,00:04:42:20,0.333,10,gp,G04,corte seco,100%,Clímax — 1 corte por batida
+184,C6,00:04:42:20,00:04:43:00,0.333,10,gp,G28,corte seco,100%,Clímax — 1 corte por batida
+185,C6,00:04:43:00,00:04:43:10,0.333,10,gp,G18,corte seco,100%,Clímax — 1 corte por batida
+186,C6,00:04:43:10,00:04:43:20,0.333,10,gp,G23,corte seco,100%,Clímax — 1 corte por batida
+187,C6,00:04:43:20,00:04:44:00,0.333,10,gp,G13,corte seco,100%,Clímax — 1 corte por batida
+188,C6,00:04:44:00,00:04:44:10,0.333,10,gp,G17,corte seco,100%,Clímax — 1 corte por batida
+189,C6,00:04:44:10,00:04:44:20,0.333,10,gp,G26,corte seco,100%,Clímax — 1 corte por batida
+190,C6,00:04:44:20,00:04:45:00,0.333,10,gp,G14,corte seco,100%,Clímax — 1 corte por batida
+191,C6,00:04:45:00,00:04:45:10,0.333,10,gp,G04,corte seco,100%,Clímax — 1 corte por batida
+192,C6,00:04:45:10,00:04:45:20,0.333,10,gp,G28,corte seco,100%,Clímax — 1 corte por batida
+193,C6,00:04:45:20,00:04:46:00,0.333,10,gp,G18,corte seco,100%,Clímax — 1 corte por batida
+194,C6,00:04:46:00,00:04:46:10,0.333,10,gp,G23,corte seco,100%,Clímax — 1 corte por batida
+195,C6,00:04:46:10,00:04:46:20,0.333,10,gp,G13,corte seco,100%,Clímax — 1 corte por batida
+196,C6,00:04:46:20,00:04:47:00,0.333,10,gp,G17,corte seco,100%,Clímax — 1 corte por batida
+197,C6,00:04:47:00,00:04:47:10,0.333,10,gp,G26,corte seco,100%,Clímax — 1 corte por batida
+198,C6,00:04:47:10,00:04:47:20,0.333,10,gp,G14,corte seco,100%,Clímax — 1 corte por batida
+199,C6,00:04:47:20,00:04:48:00,0.333,10,gp,G04,corte seco,100%,Clímax — 1 corte por batida
+200,C6,00:04:48:00,00:04:48:10,0.333,10,gp,G28,corte seco,100%,Clímax — 1 corte por batida
+201,C6,00:04:48:10,00:04:48:20,0.333,10,gp,G18,corte seco,100%,Clímax — 1 corte por batida
+202,C6,00:04:48:20,00:04:49:00,0.333,10,gp,G23,corte seco,100%,Clímax — 1 corte por batida
+203,C6,00:04:49:00,00:04:49:10,0.333,10,gp,G13,corte seco,100%,Clímax — 1 corte por batida
+204,C6,00:04:49:10,00:04:49:20,0.333,10,gp,G17,corte seco,100%,Clímax — 1 corte por batida
+205,C6,00:04:49:20,00:04:50:00,0.333,10,gp,G26,corte seco,100%,Clímax — 1 corte por batida
+206,C6,00:04:50:00,00:04:50:10,0.333,10,gp,G14,corte seco,100%,Clímax — 1 corte por batida
+207,C6,00:04:50:10,00:04:50:20,0.333,10,gp,G04,corte seco,100%,Clímax — 1 corte por batida
+208,C6,00:04:50:20,00:04:51:00,0.333,10,gp,G28,corte seco,100%,Clímax — 1 corte por batida
+209,C6,00:04:51:00,00:04:51:10,0.333,10,gp,G18,corte seco,100%,Clímax — 1 corte por batida
+210,C6,00:04:51:10,00:04:51:20,0.333,10,gp,G23,corte seco,100%,Clímax — 1 corte por batida
+211,C6,00:04:51:20,00:04:52:00,0.333,10,gp,G13,corte seco,100%,Clímax — 1 corte por batida
+212,C6,00:04:52:00,00:04:52:10,0.333,10,gp,G17,corte seco,100%,Clímax — 1 corte por batida
+213,C6,00:04:52:10,00:04:52:20,0.333,10,gp,G26,corte seco,100%,Clímax — 1 corte por batida
+214,C6,00:04:52:20,00:04:53:00,0.333,10,gp,G14,corte seco,100%,Clímax — 1 corte por batida
+215,C6,00:04:53:00,00:04:53:10,0.333,10,gp,G04,corte seco,100%,Clímax — 1 corte por batida
+216,C6,00:04:53:10,00:04:53:20,0.333,10,gp,G28,corte seco,100%,Clímax — 1 corte por batida
+217,C6,00:04:53:20,00:04:54:00,0.333,10,gp,G18,corte seco,100%,Clímax — 1 corte por batida
+218,C6,00:04:54:00,00:04:54:10,0.333,10,gp,G23,corte seco,100%,Clímax — 1 corte por batida
+219,C6,00:04:54:10,00:04:54:20,0.333,10,gp,G13,corte seco,100%,Clímax — 1 corte por batida
+220,C6,00:04:54:20,00:04:55:00,0.333,10,gp,G17,corte seco,100%,Clímax — 1 corte por batida
+221,C6,00:04:55:00,00:04:55:10,0.333,10,gp,G26,corte seco,100%,Clímax — 1 corte por batida
+222,C6,00:04:55:10,00:04:55:20,0.333,10,gp,G14,corte seco,100%,Clímax — 1 corte por batida
+223,C6,00:04:55:20,00:04:56:00,0.333,10,gp,G04,corte seco,100%,Clímax — 1 corte por batida
+224,C6,00:04:56:00,00:04:56:00,0.002,0,gp,G28,corte seco,100%,Clímax — 1 corte por batida
+225,C6,00:04:56:00,00:04:57:00,1.000,30,black,,corte,100%,CORTE SECO PARA SILÊNCIO
+226,C6,00:04:57:00,00:04:59:20,2.667,80,card,,corte,100%,YOU ARE NOT HERE TO SURVIVE.
+227,C6,00:04:59:20,00:05:02:20,3.000,90,card,,corte,100%,YOU ARE HERE TO DOMINATE.
+228,C6,00:05:02:20,00:05:08:00,5.333,160,logo,A01,corte no impacto,100%,Logotipo ULTRAKILL + impacto
+229,C6,00:05:08:00,00:05:12:00,4.000,120,black,,fade 1 s,100%,Fade para preto

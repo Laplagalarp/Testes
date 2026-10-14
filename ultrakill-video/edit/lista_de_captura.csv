@@ -1,0 +1,34 @@
+id,o_que,como_gravar,usos,tempo_total_no_video_s,primeira_entrada
+G01,Primeiro combate de 1-1 (Limbo),"Entrada em arena, mortes no ar com revólver e shotgun, HUD ligado.",1,4.0,00:00:16:00
+G04,Cura por sangue,Explodir um inimigo à queima-roupa e mostrar a barra de vida subindo com o sangue. Gravar também em câmera lenta (Sandbox + slowmo do editor).,8,9.3,00:00:11:20
+G05,Dash triplo,Três dashes seguidos com a barra de stamina visível no HUD.,1,1.3,00:01:08:00
+G06,Slide + slide jump,Slide longo atravessando a arena e pulo no fim do slide (ganho de distância).,3,4.3,00:00:10:00
+G07,Wall jumps,Escalar uma parede/pilar com saltos na parede consecutivos.,2,1.7,00:00:11:00
+G08,Ground slam + pulo,Slam do alto até o chão e pulo imediato ao aterrissar (salto mais alto).,3,4.7,00:00:07:10
+G09,Movimento encadeado,"20–30 s contínuos de dash/slide/slam/wall jump em arena vertical, matando sem parar. Ideal: Cyber Grind ou camada 7.",12,19.7,00:00:04:00
+G10,Troca de armas,"Um combate usando revólver, shotgun, nailgun, railcannon e lança-foguetes em sequência rápida. Gravar 1 kill limpa por arma.",6,10.7,00:01:22:20
+G11,Variantes,Railcannon Electric atravessando fila de inimigos; Freezeframe do lança-foguetes; Nailgun com variante de ímã; Core Eject da shotgun.,11,7.0,00:00:12:00
+G12,Moeda simples,"Revólver Marksman: jogar moeda e acertar o tiro nela, ricocheteando num inimigo. Ângulo limpo, de preferência no Sandbox.",2,4.3,00:00:10:20
+G13,Corrente de moedas,3–4 moedas no ar encadeadas em um único tiro. Repetir até sair perfeito.,17,14.3,00:00:04:20
+G14,Railcoin,Tiro do railcannon acertando uma moeda e ricocheteando.,12,9.3,00:00:08:00
+G15,Parry de projétil,"Socar de volta um projétil inimigo (Feedbacker), matando o atirador. Mostrar o flash e a barra de vida enchendo.",10,7.3,00:00:05:10
+G16,Projectile boost,Disparar a shotgun e socar os estilhaços logo em seguida.,6,8.3,00:00:09:20
+G17,Parry corpo a corpo,Parry num ataque corpo a corpo de inimigo/chefe que permita parry. Gravar 3 tentativas boas.,16,9.7,00:00:12:10
+G18,Medidor de estilo,"Combate longo com o medidor de estilo visível subindo do D até o ULTRAKILL. HUD ligado, Cyber Grind em onda alta.",9,14.7,00:00:06:20
+G19,Arma 'stale',Usar a mesma arma repetidamente até o medidor indicar que ela ficou repetitiva (freshness caindo).,1,4.0,00:02:15:10
+G20a,Ambiente — Limbo (1-x),"Planos lentos sem combate, HUD desligado. Mouse suave, panorâmicas de 6–8 s.",1,6.0,00:02:24:00
+G20b,Ambiente — Lust (2-x),"Planos lentos sem combate, HUD desligado.",1,5.0,00:02:30:00
+G20c,Ambiente — Gluttony (3-x),"Planos lentos sem combate, HUD desligado.",1,5.0,00:02:35:00
+G20d,Ambiente — Greed (4-x),"Planos lentos sem combate, HUD desligado.",1,5.0,00:02:40:00
+G20e,Ambiente — Wrath (5-x),"Planos lentos sem combate, HUD desligado.",1,5.0,00:02:45:00
+G20f,Ambiente — Heresy (6-x) e Violence (7-x),"Planos lentos sem combate, HUD desligado.",1,5.0,00:02:50:00
+G21,Inimigos,"Close de Filth, Stray, Malicious Face e Mindflayer (Sandbox com braço spawner ou fases).",4,7.0,00:02:55:00
+G22,Chefes,V2 (1-4) e Gabriel (3-2). Momentos de entrada e o primeiro golpe de cada luta.,2,8.7,00:03:02:00
+G23,Chefe em fúria,"15–20 s do trecho mais intenso de uma luta de chefe, com parries e trocas de arma.",41,15.0,00:00:06:00
+G24,Tela de resultado,"Tela final de fase com nota em tempo, kills e estilo; uma versão comum e uma com P-RANK.",2,12.0,00:03:28:00
+G25,"Mesma fase, 3 tentativas","O MESMO encontro gravado 3 vezes: tentativa ruim, média e a melhor (para split screen).",1,12.0,00:03:40:00
+G26,Cyber Grind,"Ondas altas do Cyber Grind, plano aberto da arena mudando.",8,10.3,00:00:11:10
+G27,Sandbox,"Experimentos: combos de moeda + railcannon, explosões, criatividade.",1,8.0,00:03:52:00
+G28,Clipes de alto nível,Melhores momentos (seus ou de criadores que autorizarem por escrito).,27,19.7,00:00:08:20
+A01,Logotipo oficial ULTRAKILL,"Do press kit oficial da New Blood ou página da Steam, conforme termos de uso.",1,5.3,00:05:02:20
+A02,Arte oficial de V1,Key art do press kit / Steam.,2,9.7,00:00:20:00

@@ -1,0 +1,168 @@
+1
+00:00:05,000 --> 00:00:08,667
+Imagina um FPS que não quer saber se você vai sobreviver…
+
+2
+00:00:09,000 --> 00:00:12,333
+…e sim se você vai fazer isso com estilo.
+
+3
+00:00:16,333 --> 00:00:22,667
+ULTRAKILL é um FPS criado pelo desenvolvedor finlandês Arsi “Hakita” Patala, publicado pela New Blood Interactive.
+
+4
+00:00:23,667 --> 00:00:27,667
+Ele bebe direto da fonte dos shooters dos anos 90, tipo DOOM e Quake…
+
+5
+00:00:28,000 --> 00:00:34,000
+…mas mistura isso com um medidor de estilo que julga cada segundo do seu combate.
+
+6
+00:00:35,333 --> 00:00:38,000
+A premissa é simples: a humanidade acabou.
+
+7
+00:00:38,667 --> 00:00:41,667
+As máquinas que sobraram funcionam à base de sangue.
+
+8
+00:00:42,000 --> 00:00:44,667
+E o Inferno… está lotado.
+
+9
+00:00:45,667 --> 00:00:50,667
+Você é V1: uma máquina de guerra que desce camada por camada do Inferno atrás de combustível.
+
+10
+00:00:51,333 --> 00:00:57,667
+E o detalhe que muda tudo: V1 se cura com o sangue dos inimigos. Mas só se estiver perto o bastante pra se banhar nele.
+
+11
+00:00:58,333 --> 00:01:03,333
+Ou seja: ficar escondido não é uma opção. O jogo te empurra pra frente.
+
+12
+00:01:04,000 --> 00:01:05,667
+Então vamos falar de combate.
+
+13
+00:01:05,667 --> 00:01:08,000
+V1 é rápida. Absurdamente rápida.
+
+14
+00:01:08,000 --> 00:01:13,333
+Dash. Slide. Salto na parede. Slam.
+
+15
+00:01:13,333 --> 00:01:18,333
+E tudo se encadeia: o slide vira um pulo longo, o slam vira um salto ainda mais alto.
+
+16
+00:01:18,667 --> 00:01:22,333
+A arena deixa de ser um chão… e vira um espaço em três dimensões.
+
+17
+00:01:22,667 --> 00:01:29,333
+Revólver. Shotgun. Nailgun. Railcannon. Lança-foguetes.
+
+18
+00:01:29,667 --> 00:01:35,667
+E cada arma tem variantes que mudam completamente o jeito de jogar.
+
+19
+00:01:36,000 --> 00:01:39,667
+Trocar de arma no meio do combo não é só permitido. É recompensado.
+
+20
+00:01:40,000 --> 00:01:42,000
+E aí… tem as moedas.
+
+21
+00:01:42,333 --> 00:01:49,333
+Uma variante do revólver joga moedas pro alto. Você atira nelas, e o tiro ricocheteia no inimigo. Ou em outra moeda. E em outra.
+
+22
+00:01:49,667 --> 00:01:53,333
+Dá pra ricochetear até o disparo do railcannon.
+
+23
+00:01:56,000 --> 00:01:59,667
+Inimigo atirou em você? Soca de volta.
+
+24
+00:02:00,000 --> 00:02:05,333
+Dá pra socar até os próprios tiros: shotgun e soco na sequência, e os estilhaços saem turbinados.
+
+25
+00:02:05,333 --> 00:02:09,667
+E acertar um parry ainda te devolve vida. Defender é atacar.
+
+26
+00:02:10,000 --> 00:02:14,667
+Tudo isso alimenta o medidor de estilo. De Destructive até ULTRAKILL.
+
+27
+00:02:15,333 --> 00:02:19,000
+Repetir a mesma arma? O estilo cai. O jogo quer variedade.
+
+28
+00:02:19,333 --> 00:02:23,667
+Habilidade, agressividade e criatividade. Tudo ao mesmo tempo.
+
+29
+00:02:25,333 --> 00:02:29,667
+Mas não dá pra falar de ULTRAKILL sem falar do lugar onde tudo acontece.
+
+30
+00:02:30,333 --> 00:02:37,667
+O jogo é dividido em camadas inspiradas no Inferno de Dante: Limbo, Luxúria, Gula, Ganância, Ira, Heresia, Violência…
+
+31
+00:02:38,667 --> 00:02:48,667
+E cada camada tem identidade própria. Arquitetura, cor e música mudam a cada descida, e a trilha do Heaven Pierce Her acompanha cada uma delas.
+
+32
+00:02:50,000 --> 00:02:54,667
+O Inferno de ULTRAKILL é bonito. Estranho. E sempre hostil.
+
+33
+00:02:55,000 --> 00:03:01,667
+Lá embaixo vivem Filths, Strays, Malicious Faces… e Mindflayers.
+
+34
+00:03:02,333 --> 00:03:10,333
+E os chefes são outro nível. V2, uma máquina como você. Gabriel, o Juiz do Inferno.
+
+35
+00:03:11,000 --> 00:03:11,667
+E aí…
+
+36
+00:03:28,333 --> 00:03:31,667
+Então por que é tão difícil largar ULTRAKILL?
+
+37
+00:03:32,000 --> 00:03:39,667
+Porque toda fase termina com uma nota. E a nota máxima, o P-Rank, exige S em tudo, sem morrer.
+
+38
+00:03:40,000 --> 00:03:51,667
+Aí você volta. Descobre uma rota mais rápida. Um combo que nem sabia que existia. Um jeito de limpar a sala em dois segundos em vez de dez.
+
+39
+00:03:52,000 --> 00:03:59,667
+O jogo não muda. Você muda. No começo você sobrevive. Depois você entende. E no fim… você se exibe.
+
+40
+00:04:00,000 --> 00:04:07,667
+E tem o Cyber Grind, com ondas infinitas, e o Sandbox, pra testar qualquer maluquice que você imaginar.
+
+41
+00:04:08,333 --> 00:04:17,667
+No fim das contas, ULTRAKILL não é só sobre atirar. É sobre transformar o combate numa performance.
+
+42
+00:04:57,333 --> 00:05:02,333
+Você não está aqui pra sobreviver. Está aqui pra dominar.
+
